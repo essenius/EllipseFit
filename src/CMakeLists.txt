@@ -5,18 +5,6 @@ if (NOT Git_FOUND)
 	message(FATAL_ERROR "Git not found!")
 endif ()
 
-# include (FetchContent)
-
-# FetchContent_Declare(
-#     matrixlib
-#     GIT_REPOSITORY https://github.com/essenius/matrix
-#     GIT_TAG main    
-#     SOURCE_SUBDIR src
-#     SOURCE_DIR matrixlib
-# )
-
-# FetchContent_MakeAvailable(matrixlib)
-
 FetchContent_GetProperties(matrixlib SOURCE_DIR matrixSourceDir BINARY_DIR matrixBinaryDir)
 
 set (libName ${PROJECT_NAME})
