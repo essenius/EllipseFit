@@ -1,28 +1,33 @@
 
+include(tools)
 include(FindGit)
 find_package(Git)
 
-if (NOT Git_FOUND)
-	message(FATAL_ERROR "Git not found!")
-endif ()
+assertVariableSet(matrixLibName Git_FOUND)
 
 include (FetchContent)
 
-set (libName matrixlib)
-
 FetchContent_Declare(
-    ${libName}
+    ${matrixLibName}
     GIT_REPOSITORY https://github.com/essenius/matrix
     GIT_TAG main    
     SOURCE_SUBDIR src
-    SOURCE_DIR ${libName}
+    SOURCE_DIR ${matrixLibName}
 )
 
-FetchContent_MakeAvailable(${libName})
+FetchContent_Declare(
+    code-coverage
+    URL https://raw.githubusercontent.com/StableCoder/cmake-scripts/23.04/code-coverage.cmake
+    SOURCE_DIR cmake
+    DOWNLOAD_NO_EXTRACT TRUE
+)
 
-FetchContent_GetProperties(${libName} SOURCE_DIR matrixSourceDir BINARY_DIR matrixBinaryDir)
+FetchContent_MakeAvailable_With_Check(${matrixLibName})
 
-message(STATUS "${libName} matrixSourceDir = ${matrixSourceDir}")
-message(STATUS "${libName} matrixBinaryDir = ${matrixBinaryDir}")
-message(STATUS "${libName} cmake binary dir = ${CMAKE_BINARY_DIR}")
-message(STATUS "${libName} includes = ${INCLUDE_DIRECTORIES}")
+FetchContent_MakeAvailable_With_Check(code-coverage)
+
+#get_cmake_property(_variableNames VARIABLES)
+#list (SORT _variableNames)
+#foreach (_variableName ${_variableNames})
+#    message(STATUS "${_variableName}=${${_variableName}}")
+#endforeach()
