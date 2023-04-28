@@ -3,16 +3,16 @@ include(tools)
 include(FindGit)
 find_package(Git)
 
-assertVariableSet(matrixLibName Git_FOUND)
+assertVariableSet(matrixName Git_FOUND)
 
 include (FetchContent)
 
 FetchContent_Declare(
-    ${matrixLibName}
+    ${matrixName}
     GIT_REPOSITORY https://github.com/essenius/matrix
     GIT_TAG main    
-    SOURCE_SUBDIR src
-    SOURCE_DIR ${matrixLibName}
+    #SOURCE_SUBDIR src
+    SOURCE_DIR ${matrixName}
 )
 
 FetchContent_Declare(
@@ -22,7 +22,7 @@ FetchContent_Declare(
     DOWNLOAD_NO_EXTRACT TRUE
 )
 
-FetchContent_MakeAvailable_With_Check(${matrixLibName})
+FetchContent_MakeAvailable_With_Check(${matrixName})
 
 FetchContent_MakeAvailable_With_Check(code-coverage)
 

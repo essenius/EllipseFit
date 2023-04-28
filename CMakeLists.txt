@@ -2,9 +2,10 @@ cmake_minimum_required(VERSION 3.14)
 
 set(libName EllipseFit)
 set(testLibName ${libName}Test)
-set (matrixLibName matrixlib)
+set(matrixName matrix) # lower case is important for fetching the library
+set(matrixLibName Matrix) # the name of the library as defined in the CMakeLists.txt of the library
 
-project(${libName} VERSION 0.0.1) #name of your project
+project(${libName} VERSION 0.0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_EXTENSIONS OFF)

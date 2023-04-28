@@ -1,5 +1,7 @@
 function(FetchContent_MakeAvailable_With_Check targetName)
+    Message(STATUS "Fetching ${targetName}")
     FetchContent_MakeAvailable(${targetName})
+    Message(STATUS "Checking ${${targetName}_POPULATED}")
     if(NOT ${targetName}_POPULATED)
         message(FATAL_ERROR "Could not make ${targetName} available")
     endif()

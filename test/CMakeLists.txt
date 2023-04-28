@@ -3,7 +3,7 @@ include(tools)
 include(FindGit)
 find_package(Git)
 
-assertVariableSet(testLibName Git_FOUND)
+assertVariableSet(testLibName matrixLibName Git_FOUND)
 
 include(FetchContent)
 
@@ -21,12 +21,14 @@ FetchContent_MakeAvailable_With_Check(googletest)
 
 add_executable(${testLibName} "")
 
-file(GLOB_RECURSE myHeaders LIST_DIRECTORIES true *.h)
-file(GLOB_RECURSE mySources LIST_DIRECTORIES true *.cpp)
-target_sources (${testLibName} PUBLIC ${myHeaders} PRIVATE ${mySources})
+# not using file(GLOB_RECURSE myHeaders LIST_DIRECTORIES true *.h) as explit listing is less error prone
+target_sources (${testLibName} 
+    PUBLIC TestHelper.h 
+    PRIVATE EllipseFitTest.cpp TestHelper.cpp 
+)
 
-FetchContent_MakeAvailable_With_Check(${matrixLibName})
+FetchContent_MakeAvailable_With_Check(${matrixName})
 
-target_link_libraries(${testLibName} ${CMAKE_PROJECT_NAME} gtest_main ${${matrixLibName}_BINARY_DIR}/libMatrix.a)
+target_link_libraries(${testLibName} ${libName} gtest_main ${matrixLibName})
 
 add_test(NAME ${testLibName} COMMAND ${testLibName})
