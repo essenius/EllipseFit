@@ -14,19 +14,13 @@
 #include "CartesianEllipse.h"
 #include "MathUtils.h"
 
-CartesianEllipse::CartesianEllipse(const Coordinate& center, const Coordinate& radius, const Angle& angle) {
-	this->center = center;
-	this->radius = radius;
-	this->angle = angle;
-	hasData = true;
-}
+CartesianEllipse::CartesianEllipse(const Coordinate& center, const Coordinate& radius, const Angle& angle): 
+	center(center), radius(radius), angle(angle), hasData(true) {}
 
-CartesianEllipse::CartesianEllipse(const QuadraticEllipse& quadraticEllipse) {
-	coefficient = quadraticEllipse;
+CartesianEllipse::CartesianEllipse(const QuadraticEllipse& quadraticEllipse): coefficient(quadraticEllipse), hasData(true) {
 	center = coefficient.center();
 	radius = coefficient.radius();
 	angle = coefficient.angle();
-	hasData = true;
 }
 
 bool CartesianEllipse::fitSucceeded() const {

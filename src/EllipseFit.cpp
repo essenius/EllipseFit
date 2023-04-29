@@ -53,6 +53,11 @@ QuadraticEllipse EllipseFit::fit() {
 	const Matrix scatter2 = _design1.transpose() * _design2;
 	const Matrix scatter3 = _design2.transpose() * _design2;
 
+	if (!scatter3.isInvertible()) {
+		// if the scatter matrix is not invertible, we can't fit an ellipse
+		return QuadraticEllipse();
+	}
+
 	// reduced scatter matrix (M in the article)
 	const SolverMatrix reducedScatter = _c1Inverse * (scatter1 - scatter2 * scatter3.inverse() * scatter2.transpose());
 
@@ -66,17 +71,18 @@ QuadraticEllipse EllipseFit::fit() {
 
 	// there should be one where the condition is positive, that's the one we need
 
+	auto found = false;
 	for (int eigenVectorIndex = 0; eigenVectorIndex < condition.columns(); eigenVectorIndex++) {
 		if (condition(0, eigenVectorIndex) > 0) {
 			a1 = eigenvectors.getColumn(eigenVectorIndex);
+			found = true;
 			break;
 		}
-		// we didn't find it (should not happen)
-		if (eigenVectorIndex == 2) {
-			/* TODO: remove this print statement */
-			printf("No positive eigenvector found");
+	}
+
+	// this could happen if the data doesn't represent an ellipse, e.g. a straight line
+	if (!found) {
 			return {0, 0, 0, 0, 0, 0};
-		}
 	}
 
     const auto a2 = -1 * scatter3.inverse() * scatter2.transpose() * a1;

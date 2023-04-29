@@ -12,16 +12,22 @@
 #include <cstdio>
 #include <cmath>
 #include "Angle.h"
+#include "MathUtils.h"
 
-Angle Angle::operator- (const Angle& other) const {
-	return { operator-(other.value) };
+double Angle::normalize(const double& value) {
+	const auto bound = abs(value) / M_PI;
+	if (abs(bound) <= 1) return value;
+	const auto factor = std::trunc(0.5 * (bound + 1)) * -sign(value);
+	return value + factor * 2 * M_PI;
+}
+
+Angle Angle::operator-(const Angle &other) const {
+    return { operator-(other.value) };
 }
 
 double Angle::operator- (const double& other) const {
 	auto returnValue = value - other;
-	if (returnValue < -M_PI) returnValue += 2 * M_PI;
-	if (returnValue > M_PI) returnValue -= 2 * M_PI;
-	return  returnValue;
+	return normalize(returnValue);
 }
 
 unsigned int Angle::quadrant() const {

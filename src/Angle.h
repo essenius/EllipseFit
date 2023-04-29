@@ -17,6 +17,7 @@
 
 struct Angle {
 	double value;
+	static double normalize(const double& value);
     Angle operator-(const Angle& other) const;
 	double operator-(const double& other) const;
 	unsigned int quadrant() const;

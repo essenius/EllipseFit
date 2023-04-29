@@ -25,4 +25,5 @@ constexpr double EPSILON = 1e-4;
 bool aboutEqual(const double& a, const double& b, const double& epsilon = EPSILON);
 double sqr(const double& a);
 int modulo(int a, int b);
+double sign(const double& a);
 #endif

@@ -10,6 +10,7 @@
 // See the License for the specific language governing permissions and limitations under the License.
 
 #include <cmath>
+#include "MathUtils.h"
 
 bool aboutEqual(const double& a, const double& b, const double& epsilon) {
 	return abs(a - b) <= epsilon;
@@ -20,5 +21,11 @@ double sqr(const double& a) {
 }
 
 int modulo(const int a, const int b) {
-	return (b + a % b) % b;
+    return (b + a % b) % b;
+}
+
+double sign(const double &a) {
+	if (a < 0) return -1;
+	if (a > 0) return 1;
+	return 0;
 }

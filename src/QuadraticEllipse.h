@@ -25,14 +25,15 @@ struct QuadraticEllipse {
 	double g{};
 
 	QuadraticEllipse(const double& a1, const double& b1, const double& c1, const double& d1, const double& f1, const double& g1);
-	QuadraticEllipse() = default;
-	Angle angle();
+    QuadraticEllipse() = default;
+    Angle angle();
 	Coordinate center() const;
+    bool isValid() const;
 	Coordinate radius();
 private:
 	double discriminant() const;
 	Coordinate _radius{};
 	bool _radiusCalculated = false;
-	bool _switchedAxes = false;
+	/* bool _switchedAxes = false; */
 };
 #endif

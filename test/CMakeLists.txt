@@ -23,8 +23,8 @@ add_executable(${testLibName} "")
 
 # not using file(GLOB_RECURSE myHeaders LIST_DIRECTORIES true *.h) as explit listing is less error prone
 target_sources (${testLibName} 
-    PUBLIC TestHelper.h 
-    PRIVATE EllipseFitTest.cpp TestHelper.cpp 
+    PUBLIC TestHelper.h EllipseFitTest.h
+    PRIVATE AngleTest.cpp CartesianEllipseTest.cpp CoordinateTest.cpp EllipseFitTest.cpp MathUtilsTest.cpp QuadraticEllipseTest.cpp TestHelper.cpp 
 )
 
 FetchContent_MakeAvailable_With_Check(${matrixName})

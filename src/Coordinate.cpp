@@ -18,7 +18,6 @@
 
 bool Coordinate::operator==(const Coordinate& other) const {
     constexpr double EPSILON = 1e-6;
-    printf("Coordinate== called\n");
     return aboutEqual(x, other.x) && aboutEqual(y, other.y);
 }
 
