@@ -19,7 +19,6 @@
 #include "QuadraticEllipse.h"
 #include "SolverMatrix.h"
 
-
 class EllipseFit {
 
 public: 

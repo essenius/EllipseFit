@@ -13,8 +13,8 @@
 #define TEST_HELPER_H
 
 #include <string>
-#include "../src/MathUtils.h"
-#include "../src/Coordinate.h"
+#include "MathUtils.h"
+#include "Coordinate.h"
 
 void assertDoubleEqual(const double& a, const double& b, const std::string& label, const double& epsilon = EPSILON);
 void assertCoordinatesEqual(const Coordinate& a, const Coordinate& b, const std::string& label, const double& epsilon = EPSILON);

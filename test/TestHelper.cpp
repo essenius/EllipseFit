@@ -12,7 +12,7 @@
 #include <gtest/gtest.h>
 #include "TestHelper.h"
 
-#include "../src/MathUtils.h"
+#include "MathUtils.h"
 
 void assertDoubleEqual(const double& a, const double& b, const std::string& label, const double& epsilon) {
 	ASSERT_TRUE(aboutEqual(a, b, epsilon)) << label << ": " << a << "!=" << b;
