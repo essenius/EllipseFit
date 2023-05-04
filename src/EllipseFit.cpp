@@ -19,7 +19,7 @@
 // fixed buffer size as we don't want to fragment the heap
 constexpr unsigned int EllipseFit::BUFFER_SIZE;  // NOLINT(readability-redundant-declaration) -- using C++ 11 on device
 
-EllipseFit::EllipseFit() : _c1Inverse(3, 3), _design1(BUFFER_SIZE, 3), _design2(BUFFER_SIZE, 3) {
+EllipseFit::EllipseFit() {
 	// Calculating the constant vectors/matrices once to save a bit of time when fitting
 	Matrix c1({{0, 0, 2},{ 0, -1, 0},{ 2, 0, 0}});
 	_c1Inverse = c1.inverse();
@@ -59,7 +59,7 @@ QuadraticEllipse EllipseFit::fit() {
 	}
 
 	// reduced scatter matrix (M in the article)
-	const SolverMatrix reducedScatter = _c1Inverse * (scatter1 - scatter2 * scatter3.inverse() * scatter2.transpose());
+	const auto reducedScatter = SolverMatrix(_c1Inverse * (scatter1 - scatter2 * scatter3.inverse() * scatter2.transpose()));
 
 	const auto eigenvectors = reducedScatter.getEigenvectors();
 
@@ -74,7 +74,7 @@ QuadraticEllipse EllipseFit::fit() {
 	auto found = false;
 	for (int eigenVectorIndex = 0; eigenVectorIndex < condition.columns(); eigenVectorIndex++) {
 		if (condition(0, eigenVectorIndex) > 0) {
-			a1 = eigenvectors.getColumn(eigenVectorIndex);
+			a1 = Matrix(eigenvectors.getColumn(eigenVectorIndex));
 			found = true;
 			break;
 		}

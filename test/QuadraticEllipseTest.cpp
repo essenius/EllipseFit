@@ -34,11 +34,6 @@ void assertEllipse(const Coordinate& center, const Coordinate& radius, const Ang
 	assertCoordinatesEqual(center, center1, "Center");
 	const auto radius1 = coefficient.radius();
 	assertCoordinatesEqual(radius, radius1, "Radius");
-	// force a change in coordinates to validate it is not calculated again (that would yield a different result)
-	coefficient.a = 0;
-	const auto radius2 = coefficient.radius();
-	assertCoordinatesEqual(radius, radius1, "Radius");
-
 }
 
 TEST(QuadraticEllipseTest, RoundTrip) {

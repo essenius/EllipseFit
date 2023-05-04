@@ -13,7 +13,7 @@
 #include "EllipseFitTest.h"
 #include "TestHelper.h"
 
-QuadraticEllipse EllipseFitTest::fitPerfectEllipse(EllipseFit& ellipseFit, const CartesianEllipse& inputEllipse) {
+QuadraticEllipse EllipseFitTest::fitPerfectEllipse(EllipseFit& ellipseFit, const CartesianEllipse& inputEllipse) const {
 	const unsigned int pointsOnEllipse = EllipseFit::size();
 	ellipseFit.begin();
 	auto x = -M_PI;
@@ -29,7 +29,7 @@ QuadraticEllipse EllipseFitTest::fitPerfectEllipse(EllipseFit& ellipseFit, const
 	return ellipseFit.fit();
 }
 
-void EllipseFitTest::assertPerfectEllipse(const Coordinate& center, const Coordinate& radius, const Angle& angle) {
+void EllipseFitTest::assertPerfectEllipse(const Coordinate& center, const Coordinate& radius, const Angle& angle) const {
 	auto inputEllipse = CartesianEllipse(center, radius, angle);
 	EllipseFit ellipseFit;
 	const auto result = fitPerfectEllipse(ellipseFit, inputEllipse);
@@ -51,7 +51,7 @@ void EllipseFitTest::assertPerfectEllipse(const Coordinate& center, const Coordi
 
 // create two ellipses at a distance from the expected result, and add points from each to the fitter.
 
-void EllipseFitTest::assertEllipseWithDistance(const Coordinate& center, const Coordinate& radius, const Angle& angle, const double& distance) {
+void EllipseFitTest::assertEllipseWithDistance(const Coordinate& center, const Coordinate& radius, const Angle& angle, const double& distance) const {
 	auto distancec = Coordinate{ distance, distance };
 	const auto innerEllipse = CartesianEllipse(center, radius.translate(-distancec), angle);
 	const auto outerEllipse = CartesianEllipse(center, radius.translate(distancec), angle);
@@ -88,7 +88,7 @@ void EllipseFitTest::assertEllipseWithDistance(const Coordinate& center, const C
 	}
 }
 
-void EllipseFitTest::assertPartialEllipse(const CartesianEllipse& ellipse, const double& fraction, const double &startAngle) {
+void EllipseFitTest::assertPartialEllipse(const CartesianEllipse& ellipse, const double& fraction, const double &startAngle) const {
 
 	const unsigned int points = EllipseFit::size();
 	EllipseFit ellipseFit;

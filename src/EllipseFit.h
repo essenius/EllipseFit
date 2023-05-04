@@ -33,9 +33,9 @@ public:
 
 private:
 	static constexpr unsigned int BUFFER_SIZE = 32;
-	Matrix _c1Inverse;
-	Matrix _design1;
-	Matrix _design2;
+	Matrix _c1Inverse {3, 3};
+	Matrix _design1 {BUFFER_SIZE, 3};
+	Matrix _design2 {BUFFER_SIZE, 3};
 
 	unsigned int _size = 0;
 };

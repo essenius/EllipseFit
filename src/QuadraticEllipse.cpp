@@ -20,53 +20,34 @@
 // we use a, b, c, d, f, g as Wolfram does that too - probably to not use e, which can cause confusion with the mathematical entity
 
 QuadraticEllipse::QuadraticEllipse(const double& a1, const double& b1, const double& c1, const double& d1, const double& f1, const double& g1):
-	a(a1), b(b1/2), c(c1), d(d1/2), f(f1/2), g(g1) {}
-
-bool QuadraticEllipse::isValid() const {
-	return discriminant() != 0;
+	a(a1), b(b1/2), c(c1), d(d1/2), f(f1/2), g(g1) {
+	_discriminant = sqr(b) - a * c;
 }
 
-Angle QuadraticEllipse::angle() {
+bool QuadraticEllipse::isValid() const {
+	return _discriminant != 0;
+}
+
+Angle QuadraticEllipse::angle() const {
 	if (b == 0) {  // NOLINT(clang-diagnostic-float-equal) -- avoiding division by 0
 		return { (a < c ? 0 : M_PI / 2) };
 	}
-
-	// we need the radius calculated, since that can cause switched axes
-	/* if (!_radiusCalculated) radius(); */
-
 	auto baseAngle = 0.5 * atan2(2 * b, a - c) + M_PI / 2;
-	/*if (_switchedAxes) {
-		baseAngle += M_PI / 2;
-	}*/
 	if (baseAngle > M_PI / 2) baseAngle -= M_PI;
 	return { baseAngle };
 }
 
 Coordinate QuadraticEllipse::center() const {
-	return { (c * d - b * f) / discriminant(), (a * f - b * d) / discriminant() };
-}
-
-double QuadraticEllipse::discriminant() const {
-	return sqr(b) - a * c;
+	return { (c * d - b * f) / _discriminant, (a * f - b * d) / _discriminant };
 }
 
 Coordinate QuadraticEllipse::radius() {
-	if (_radiusCalculated) return _radius;
-
 	const double numerator = 2 * (a * sqr(f) + c * sqr(d) + g * sqr(b) - 2 * b * d * f - a * c * g);
 	const double partialDenominator = sqrt(sqr(a - c) + 4 * sqr(b));
-	const double widthDenominator = discriminant() * (partialDenominator - (a + c));
-	const double heightDenominator = discriminant() * (-partialDenominator - (a + c));
-
-	_radius.x = sqrt(numerator / widthDenominator);
-	_radius.y = sqrt(numerator / heightDenominator);
-	/* this never happens, so we don't need it
-	if (_radius.x < _radius.y) {
-		const auto temp = _radius.x;
-		_radius.x = _radius.y;
-		_radius.y = temp;
-		_switchedAxes = true;
-	} */
-	_radiusCalculated = true; 
-	return _radius;
+	const double widthDenominator = _discriminant * (partialDenominator - (a + c));
+	const double heightDenominator = _discriminant * (-partialDenominator - (a + c));
+	Coordinate result;
+	result.x = sqrt(numerator / widthDenominator);
+	result.y = sqrt(numerator / heightDenominator);
+	return result;
 }
