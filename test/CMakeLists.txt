@@ -3,7 +3,7 @@ include(tools)
 include(FindGit)
 find_package(Git)
 
-assertVariableSet(testLibName matrixLibName Git_FOUND)
+assertVariableSet(testFitName matrixLibName Git_FOUND)
 
 include(FetchContent)
 
@@ -19,16 +19,16 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 
 FetchContent_MakeAvailable_With_Check(googletest)
 
-add_executable(${testLibName} "")
+add_executable(${testFitName} "")
 
 # not using file(GLOB_RECURSE myHeaders LIST_DIRECTORIES true *.h) as explit listing is less error prone
-target_sources (${testLibName} 
+target_sources (${testFitName} 
     PUBLIC TestHelper.h EllipseFitTest.h
     PRIVATE AngleTest.cpp CartesianEllipseTest.cpp CoordinateTest.cpp EllipseFitTest.cpp MathUtilsTest.cpp QuadraticEllipseTest.cpp TestHelper.cpp 
 )
 
 FetchContent_MakeAvailable_With_Check(${matrixName})
 
-target_link_libraries(${testLibName} ${libName} gtest_main ${matrixLibName})
+target_link_libraries(${testFitName} ${fitName} gtest_main ${matrixLibName})
 
-add_test(NAME ${testLibName} COMMAND ${testLibName})
+add_test(NAME ${testFitName} COMMAND ${testFitName})
