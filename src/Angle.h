@@ -17,12 +17,12 @@
 
 struct Angle {
 	double value;
-	static double normalized(const double& value);
+	double cos() const;
+	int16_t degreesTimes10() const;
     Angle operator-(const Angle& other) const;
 	double operator-(const double& other) const;
 	unsigned int getQuadrant() const;
+	static double normalized(const double& value);
 	double sin() const;
-	double cos() const;
-	int16_t degreesTimes10() const;
 };
 #endif

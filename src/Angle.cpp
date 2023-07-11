@@ -14,13 +14,6 @@
 #include "Angle.h"
 #include "MathUtils.h"
 
-double Angle::normalized(const double& value) {
-	const auto bound = abs(value) / M_PI;
-	if (abs(bound) <= 1) return value;
-	const auto factor = std::trunc(0.5 * (bound + 1)) * -sign(value);
-	return value + factor * 2 * M_PI;
-}
-
 Angle Angle::operator-(const Angle &other) const {
     return { operator-(other.value) };
 }
@@ -30,6 +23,14 @@ double Angle::operator- (const double& other) const {
 	return normalized(returnValue);
 }
 
+double Angle::cos() const {
+	return std::cos(value);
+}
+
+int16_t Angle::degreesTimes10() const {
+	return static_cast <int16_t>(value * 1800.0 / M_PI);
+}
+
 unsigned int Angle::getQuadrant() const {
 	if (value < -M_PI / 2.0) return 3;
 	if (value < 0.0) return 4;
@@ -37,14 +38,13 @@ unsigned int Angle::getQuadrant() const {
 	return 2;
 }
 
+double Angle::normalized(const double& value) {
+	const auto bound = abs(value) / M_PI;
+	if (abs(bound) <= 1) return value;
+	const auto factor = std::trunc(0.5 * (bound + 1)) * -sign(value);
+	return value + factor * 2 * M_PI;
+}
+
 double Angle::sin() const {
 	return std::sin(value);
-}
-
-double Angle::cos() const {
-	return std::cos(value);
-}
-
-int16_t Angle::degreesTimes10() const {
-	return static_cast <int16_t>(value * 1800.0 / M_PI);
 }
