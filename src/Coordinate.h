@@ -20,14 +20,14 @@ struct Coordinate {
 	double y;
 
     bool operator==(const Coordinate& other) const;
-	Angle angle() const;
-	Angle angleFrom(const Coordinate& other) const;
-	double distance() const;
-	double distanceFrom(const Coordinate& other) const;
 	Coordinate operator-() const;
-	Coordinate reciprocal() const;
-	Coordinate rotate(double angle) const;
-	Coordinate translate(const Coordinate& vector) const;
-	Coordinate scale(const Coordinate& vector) const;
+	Angle getAngle() const;
+	Angle getAngleFrom(const Coordinate& other) const;
+	double getDistance() const;
+	double getDistanceFrom(const Coordinate& other) const;
+	Coordinate getReciprocal() const;
+	Coordinate rotated(double angle) const;
+	Coordinate scaled(const Coordinate& vector) const;
+	Coordinate translated(const Coordinate& vector) const;
 };
 #endif

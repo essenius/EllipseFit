@@ -29,10 +29,10 @@ QuadraticEllipse makeEllipse(const Coordinate& center, const Coordinate& radius,
 void assertEllipse(const Coordinate& center, const Coordinate& radius, const Angle& angle) {
 	auto coefficient = makeEllipse(center, radius, angle);
 
-	assertAnglesEqual(angle, coefficient.angle(), "Angle");
-	const auto center1 = coefficient.center();
+	assertAnglesEqual(angle, coefficient.getAngle(), "Angle");
+	const auto center1 = coefficient.getCenter();
 	assertCoordinatesEqual(center, center1, "Center");
-	const auto radius1 = coefficient.radius();
+	const auto radius1 = coefficient.getRadius();
 	assertCoordinatesEqual(radius, radius1, "Radius");
 }
 

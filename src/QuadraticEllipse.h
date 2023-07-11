@@ -19,10 +19,10 @@
 struct QuadraticEllipse {
 	QuadraticEllipse(const double& a1, const double& b1, const double& c1, const double& d1, const double& f1, const double& g1);
     QuadraticEllipse() = default;
-    Angle angle() const;
-	Coordinate center() const;
+    Angle getAngle() const;
+	Coordinate getCenter() const;
     bool isValid() const;
-	Coordinate radius();
+	Coordinate getRadius();
 private:
 	double a{};
 	double b{};

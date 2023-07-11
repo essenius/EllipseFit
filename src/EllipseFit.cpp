@@ -46,7 +46,7 @@ void EllipseFit::begin() {
 	_size = 0;
 }
 
-QuadraticEllipse EllipseFit::fit() {
+QuadraticEllipse EllipseFit::fit() const {
 
     // Scatter matrix (S in the article)
  	const Matrix scatter1 = _design1.transpose() * _design1;

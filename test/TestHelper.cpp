@@ -15,7 +15,7 @@
 #include "MathUtils.h"
 
 void assertDoubleEqual(const double& a, const double& b, const std::string& label, const double& epsilon) {
-	ASSERT_TRUE(aboutEqual(a, b, epsilon)) << label << ": " << a << "!=" << b;
+	ASSERT_TRUE(isAboutEqual(a, b, epsilon)) << label << ": " << a << "!=" << b;
 }
 
 void assertCoordinatesEqual(const Coordinate& a, const Coordinate& b, const std::string& label, const double& epsilon) {
@@ -25,7 +25,7 @@ void assertCoordinatesEqual(const Coordinate& a, const Coordinate& b, const std:
 
 void assertAnglesEqual(const Angle& a, const Angle& b, const std::string& label, const double& epsilon) {
 	// avoid the asymptotes for tan
-	if (aboutEqual(b.value, M_PI/2, epsilon) || aboutEqual(b.value, -M_PI / 2, epsilon)) {
+	if (isAboutEqual(b.value, M_PI/2, epsilon) || isAboutEqual(b.value, -M_PI / 2, epsilon)) {
 		assertDoubleEqual(a.value, b.value, label + "(asymptote)", epsilon);
 	}
 	else {

@@ -17,45 +17,45 @@
 #include "MathUtils.h"
 
 bool Coordinate::operator==(const Coordinate& other) const {
-    constexpr double EPSILON = 1e-6;
-    return aboutEqual(x, other.x) && aboutEqual(y, other.y);
-}
-
-Angle Coordinate::angle() const {
-    if (x == 0 && y == 0) return {NAN};
-    return {atan2(y, x)};
-}
-
-Angle Coordinate::angleFrom(const Coordinate& other) const {
-    const Coordinate difference = translate(-other);
-    return difference.angle();
-}
-
-double Coordinate::distance() const {
-    return sqrt(x * x + y * y);
-}
-
-double Coordinate::distanceFrom(const Coordinate& other) const {
-    const Coordinate difference = translate(-other);
-    return difference.distance();
-}
-
-Coordinate Coordinate::rotate(const double angle) const {
-    return {x * cos(angle) - y * sin(angle), y * cos(angle) + x * sin(angle)};
-}
-
-Coordinate Coordinate::translate(const Coordinate& vector) const {
-    return {x + vector.x, y + vector.y};
-}
-
-Coordinate Coordinate::scale(const Coordinate& vector) const {
-    return {x * vector.x, y * vector.y};
-}
-
-Coordinate Coordinate::reciprocal() const {
-    return {1 / x, 1 / y};
+    //constexpr double EPSILON = 1e-6;
+    return isAboutEqual(x, other.x) && isAboutEqual(y, other.y);
 }
 
 Coordinate Coordinate::operator-() const {
     return {-x, -y};
+}
+
+Angle Coordinate::getAngle() const {
+    if (x == 0 && y == 0) return {NAN};
+    return {atan2(y, x)};
+}
+
+Angle Coordinate::getAngleFrom(const Coordinate& other) const {
+    const Coordinate difference = translated(-other);
+    return difference.getAngle();
+}
+
+double Coordinate::getDistance() const {
+    return sqrt(x * x + y * y);
+}
+
+double Coordinate::getDistanceFrom(const Coordinate& other) const {
+    const Coordinate difference = translated(-other);
+    return difference.getDistance();
+}
+
+Coordinate Coordinate::getReciprocal() const {
+    return {1 / x, 1 / y};
+}
+
+Coordinate Coordinate::rotated(const double angle) const {
+    return {x * cos(angle) - y * sin(angle), y * cos(angle) + x * sin(angle)};
+}
+
+Coordinate Coordinate::scaled(const Coordinate& vector) const {
+    return {x * vector.x, y * vector.y};
+}
+
+Coordinate Coordinate::translated(const Coordinate& vector) const {
+    return {x + vector.x, y + vector.y};
 }

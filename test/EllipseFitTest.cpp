@@ -20,7 +20,7 @@ QuadraticEllipse EllipseFitTest::fitPerfectEllipse(EllipseFit& ellipseFit, const
 	EXPECT_FALSE(ellipseFit.bufferIsFull()) << "Buffer is not full";
 	for (unsigned int i = 0; i < pointsOnEllipse; i++) {
 		EXPECT_EQ(i, ellipseFit.pointCount()) << "Point count " << i << " is correct";
-		auto point = inputEllipse.parametricRepresentation(Angle{x});
+		auto point = inputEllipse.getParametricRepresentation(Angle{x});
 		ellipseFit.addMeasurement(point);
 		x += M_PI / (pointsOnEllipse / 2.0);
 	}
@@ -42,8 +42,8 @@ void EllipseFitTest::assertPerfectEllipse(const Coordinate& center, const Coordi
 	// check if all points of the parametric representation of the result ellipse are on the original ellipse
 	auto x = -M_PI;
 	for (int i = -16; i < static_cast<int>(EllipseFit::size()); i++) {
-		Coordinate pointOut = resultEllipse.parametricRepresentation(Angle{x});
-		const auto distanceFromEllipse = inputEllipse.distanceFrom(pointOut);
+		Coordinate pointOut = resultEllipse.getParametricRepresentation(Angle{x});
+		const auto distanceFromEllipse = inputEllipse.getDistanceFrom(pointOut);
 		assertDoubleEqual(0, distanceFromEllipse, "Distance", 0.0001);
 		x += M_PI / (EllipseFit::size() / 2.0);
 	}
@@ -53,16 +53,16 @@ void EllipseFitTest::assertPerfectEllipse(const Coordinate& center, const Coordi
 
 void EllipseFitTest::assertEllipseWithDistance(const Coordinate& center, const Coordinate& radius, const Angle& angle, const double& distance) const {
 	auto distancec = Coordinate{ distance, distance };
-	const auto innerEllipse = CartesianEllipse(center, radius.translate(-distancec), angle);
-	const auto outerEllipse = CartesianEllipse(center, radius.translate(distancec), angle);
+	const auto innerEllipse = CartesianEllipse(center, radius.translated(-distancec), angle);
+	const auto outerEllipse = CartesianEllipse(center, radius.translated(distancec), angle);
 	const unsigned int pointsOnEllipse = EllipseFit::size();
 	EllipseFit ellipseFit;
 	ellipseFit.begin();
 	auto x = -M_PI;
 	for (unsigned int i = 0; i < pointsOnEllipse; i++) {
 		Coordinate point = i % 2 == 0
-			? innerEllipse.parametricRepresentation(Angle{x})
-			: outerEllipse.parametricRepresentation(Angle{x});
+			? innerEllipse.getParametricRepresentation(Angle{x})
+			: outerEllipse.getParametricRepresentation(Angle{x});
 		ASSERT_TRUE(ellipseFit.addMeasurement(point)) << "Point " << x << " added";
 		x += M_PI / (pointsOnEllipse / 2.0);
 	}
@@ -82,8 +82,8 @@ void EllipseFitTest::assertEllipseWithDistance(const Coordinate& center, const C
 	const auto middleEllipse = CartesianEllipse(center, radius, angle);
 
 	for (int i = -16; i < static_cast<int>(pointsOnEllipse); i++) {
-		Coordinate pointOut = resultEllipse.parametricRepresentation(Angle{x});
-		assertDoubleEqual(0, middleEllipse.distanceFrom(pointOut), "Distance", 0.01);
+		Coordinate pointOut = resultEllipse.getParametricRepresentation(Angle{x});
+		assertDoubleEqual(0, middleEllipse.getDistanceFrom(pointOut), "Distance", 0.01);
 		x += M_PI / (pointsOnEllipse / 2.0);
 	}
 }
@@ -96,7 +96,7 @@ void EllipseFitTest::assertPartialEllipse(const CartesianEllipse& ellipse, const
 	const double delta = M_PI * 2.0 * fraction / points;
 	auto x = startAngle;
 	for (unsigned int i = 0; i < points; i++) {
-		Coordinate point = ellipse.parametricRepresentation(Angle{x});
+		Coordinate point = ellipse.getParametricRepresentation(Angle{x});
 		ASSERT_TRUE(ellipseFit.addMeasurement(point)) << "Point " << x << " added";
 		x += delta;
 	}
@@ -117,8 +117,8 @@ void EllipseFitTest::assertPartialEllipse(const CartesianEllipse& ellipse, const
 	x = -M_PI;
 	constexpr int POINTS_ON_ELLIPSE = 32;
 	for (int i = -16; i < POINTS_ON_ELLIPSE; i++) {
-		Coordinate pointOut = resultEllipse.parametricRepresentation(Angle{x});
-		assertDoubleEqual(0, ellipse.distanceFrom(pointOut), "Distance", 0.001);
+		Coordinate pointOut = resultEllipse.getParametricRepresentation(Angle{x});
+		assertDoubleEqual(0, ellipse.getDistanceFrom(pointOut), "Distance", 0.001);
 		x += M_PI / (POINTS_ON_ELLIPSE / 2.0);
 	}
 }

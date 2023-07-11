@@ -19,18 +19,18 @@ bool coordinateEqual(const Coordinate& a, const Coordinate& b) {
 
 TEST(CoordinateTest, AngleDistance) {
 	constexpr Coordinate BASE{ 4, 4 };
-	ASSERT_DOUBLE_EQ(M_PI / 4, BASE.angle().value) << "Angle OK";
-	ASSERT_DOUBLE_EQ(sqrt(32), BASE.distance()) << "Distance OK";
+	ASSERT_DOUBLE_EQ(M_PI / 4, BASE.getAngle().value) << "Angle OK";
+	ASSERT_DOUBLE_EQ(sqrt(32), BASE.getDistance()) << "Distance OK";
 }
 
 TEST(CoordinateTest, AngleFromDistanceFrom) {
 	constexpr Coordinate BASE{ 4, 4 };
-	ASSERT_DOUBLE_EQ(5, BASE.distanceFrom({ 0, 7 })) << "DistanceFrom OK";
-	ASSERT_DOUBLE_EQ(-M_PI / 4, BASE.angleFrom({ -4, 12 }).value) << "AngleFrom OK";
+	ASSERT_DOUBLE_EQ(5, BASE.getDistanceFrom({ 0, 7 })) << "DistanceFrom OK";
+	ASSERT_DOUBLE_EQ(-M_PI / 4, BASE.getAngleFrom({ -4, 12 }).value) << "AngleFrom OK";
 }
 
 TEST(CoordinateTest, AngleOfZeroIsNotDefined) {
-	ASSERT_TRUE(isnan(Coordinate{ 0, 0 }.angle().value)) << "Angle of 0,0 is not defined";
+	ASSERT_TRUE(isnan(Coordinate{ 0, 0 }.getAngle().value)) << "Angle of 0,0 is not defined";
 }
 
 TEST(CoordinateTest, Equal) {
@@ -45,20 +45,20 @@ TEST(CoordinateTest, Equal) {
 
 TEST(CoordinateTest, Rotate) {
 	constexpr Coordinate BASE{ 4, 4 };
-	ASSERT_TRUE(coordinateEqual(Coordinate{ 4, -4 }, BASE.rotate(-M_PI / 2))) << "Rotate OK";
+	ASSERT_TRUE(coordinateEqual(Coordinate{ 4, -4 }, BASE.rotated(-M_PI / 2))) << "Rotate OK";
 }
 
 TEST(CoordinateTest, Translate) {
 	constexpr Coordinate BASE{ 4, 4 };
-	ASSERT_TRUE(coordinateEqual(Coordinate{ 0, 16 }, BASE.translate({-4, 12}))) << "Translate OK";
+	ASSERT_TRUE(coordinateEqual(Coordinate{ 0, 16 }, BASE.translated({-4, 12}))) << "Translate OK";
 }
 
 TEST(CoordinateTest, Scale) {
 	constexpr Coordinate BASE{ 4, 4 };
-	ASSERT_TRUE(coordinateEqual(Coordinate{ 0.5, 8 }, BASE.scale({0.125, 2}))) << "Scaled OK";
+	ASSERT_TRUE(coordinateEqual(Coordinate{ 0.5, 8 }, BASE.scaled({0.125, 2}))) << "Scaled OK";
 }
 
 TEST(CoordinateTest, Reciprocal) {
 	constexpr Coordinate BASE{ 0.5, 8 };
-	ASSERT_TRUE(coordinateEqual(Coordinate{ 2, 0.125 }, BASE.reciprocal())) << "Reciproke OK";
+	ASSERT_TRUE(coordinateEqual(Coordinate{ 2, 0.125 }, BASE.getReciprocal())) << "Reciproke OK";
 }

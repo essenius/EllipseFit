@@ -36,9 +36,9 @@ struct CartesianEllipse {
 	explicit CartesianEllipse(const QuadraticEllipse& quadraticEllipse);
 
 	bool fitSucceeded() const;
-	double circumference() const;
-	double distanceFrom(const Coordinate& referencePoint) const;
-	Coordinate parametricRepresentation(const Angle& referenceAngle) const;
-	Coordinate pointOnEllipseFor(const Coordinate& referencePoint) const;
+	double getCircumference() const;
+	double getDistanceFrom(const Coordinate& referencePoint) const;
+	Coordinate getParametricRepresentation(const Angle& referenceAngle) const;
+	Coordinate getPointOnEllipseFor(const Coordinate& referencePoint) const;
 };
 #endif

@@ -26,7 +26,7 @@ public:
 	bool addMeasurement(const double x, const double y);
 	bool addMeasurement(const Coordinate& point);
 	void begin();
-	QuadraticEllipse fit();
+	QuadraticEllipse fit() const;
 	bool bufferIsFull() const { return _size >= BUFFER_SIZE; }
 	unsigned int pointCount() const { return _size; }
     static unsigned int size() { return BUFFER_SIZE; }

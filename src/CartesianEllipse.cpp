@@ -18,16 +18,16 @@ CartesianEllipse::CartesianEllipse(const Coordinate& center, const Coordinate& r
 	center(center), radius(radius), angle(angle), hasData(true) {}
 
 CartesianEllipse::CartesianEllipse(const QuadraticEllipse& quadraticEllipse): coefficient(quadraticEllipse), hasData(true) {
-	center = coefficient.center();
-	radius = coefficient.radius();
-	angle = coefficient.angle();
+	center = coefficient.getCenter();
+	radius = coefficient.getRadius();
+	angle = coefficient.getAngle();
 }
 
 bool CartesianEllipse::fitSucceeded() const {
-	return radius.distance() > EPSILON;
+	return radius.getDistance() > EPSILON;
 }
 
-double CartesianEllipse::circumference() const {
+double CartesianEllipse::getCircumference() const {
 
 	// approximation, not so easy to determine precisely.
 	// See https://www.johndcook.com/blog/2013/05/05/ramanujan-circumference-ellipse/
@@ -36,7 +36,7 @@ double CartesianEllipse::circumference() const {
 
 }
 
-Coordinate CartesianEllipse::parametricRepresentation(const Angle& referenceAngle) const {
+Coordinate CartesianEllipse::getParametricRepresentation(const Angle& referenceAngle) const {
 	// Note the angle is relative to the center of the ellipse, not the origin 
 	return Coordinate {
 		center.x + radius.x * cos(referenceAngle.value) * cos(angle.value) -
@@ -46,16 +46,16 @@ Coordinate CartesianEllipse::parametricRepresentation(const Angle& referenceAngl
 	};
 }
 
-Coordinate CartesianEllipse::pointOnEllipseFor(const Coordinate& referencePoint) const {
+Coordinate CartesianEllipse::getPointOnEllipseFor(const Coordinate& referencePoint) const {
 	// Normalize the point, then find the angle with the origin. This gives the angle that parametricRepresentation needs.
 	const auto transformedCoordinate = referencePoint
-		.translate(-center)
-		.rotate(-angle.value)
-		.scale(radius.reciprocal());
-	const auto angleWithOrigin = transformedCoordinate.angle();
-	return parametricRepresentation(angleWithOrigin);
+		.translated(-center)
+		.rotated(-angle.value)
+		.scaled(radius.getReciprocal());
+	const auto angleWithOrigin = transformedCoordinate.getAngle();
+	return getParametricRepresentation(angleWithOrigin);
 }
 
-double CartesianEllipse::distanceFrom(const Coordinate& referencePoint) const {
-	return pointOnEllipseFor(referencePoint).distanceFrom(referencePoint);
+double CartesianEllipse::getDistanceFrom(const Coordinate& referencePoint) const {
+	return getPointOnEllipseFor(referencePoint).getDistanceFrom(referencePoint);
 }

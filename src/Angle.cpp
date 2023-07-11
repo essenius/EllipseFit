@@ -14,7 +14,7 @@
 #include "Angle.h"
 #include "MathUtils.h"
 
-double Angle::normalize(const double& value) {
+double Angle::normalized(const double& value) {
 	const auto bound = abs(value) / M_PI;
 	if (abs(bound) <= 1) return value;
 	const auto factor = std::trunc(0.5 * (bound + 1)) * -sign(value);
@@ -27,10 +27,10 @@ Angle Angle::operator-(const Angle &other) const {
 
 double Angle::operator- (const double& other) const {
 	auto returnValue = value - other;
-	return normalize(returnValue);
+	return normalized(returnValue);
 }
 
-unsigned int Angle::quadrant() const {
+unsigned int Angle::getQuadrant() const {
 	if (value < -M_PI / 2.0) return 3;
 	if (value < 0.0) return 4;
 	if (value < M_PI / 2.0) return 1;

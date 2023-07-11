@@ -11,7 +11,6 @@ FetchContent_Declare(
     ${matrixName}
     GIT_REPOSITORY https://github.com/essenius/matrix
     GIT_TAG main    
-    #SOURCE_SUBDIR src
     SOURCE_DIR ${matrixName}
 )
 

@@ -12,7 +12,7 @@
 #include <cmath>
 #include "MathUtils.h"
 
-bool aboutEqual(const double& a, const double& b, const double& epsilon) {
+bool isAboutEqual(const double& a, const double& b, const double& epsilon) {
 	return abs(a - b) <= epsilon;
 }
 

@@ -10,9 +10,6 @@ FetchContent_MakeAvailable_With_Check(${matrixName})
 
 add_library(${fitName} "")
 
-#file(GLOB_RECURSE myHeaders LIST_DIRECTORIES true *.h)
-#file(GLOB_RECURSE mySources LIST_DIRECTORIES true *.cpp)
-
 set(myHeaders Angle.h CartesianEllipse.h Coordinate.h EllipseFit.h MathUtils.h QuadraticEllipse.h)
 set(mySources Angle.cpp CartesianEllipse.cpp Coordinate.cpp EllipseFit.cpp MathUtils.cpp QuadraticEllipse.cpp) 
 target_sources (${fitName} PUBLIC ${myHeaders} PRIVATE ${mySources})

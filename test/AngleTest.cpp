@@ -17,24 +17,24 @@
 TEST(AngleTest, QuadrantTest) {
 	constexpr double ANGLE_EPSILON = 0.001;
 	auto angle = Angle{ ANGLE_EPSILON };
-    EXPECT_EQ(1, angle.quadrant());
+    EXPECT_EQ(1, angle.getQuadrant());
 	angle.value = M_PI / 2 - ANGLE_EPSILON;
-	EXPECT_EQ(1, angle.quadrant());
+	EXPECT_EQ(1, angle.getQuadrant());
 
 	angle.value = M_PI - ANGLE_EPSILON;
-	EXPECT_EQ(2, angle.quadrant());
+	EXPECT_EQ(2, angle.getQuadrant());
 	angle.value = M_PI / 2 + ANGLE_EPSILON;
-	EXPECT_EQ(2, angle.quadrant());
+	EXPECT_EQ(2, angle.getQuadrant());
 
 	angle.value = -M_PI + ANGLE_EPSILON;
-	EXPECT_EQ(3, angle.quadrant());
+	EXPECT_EQ(3, angle.getQuadrant());
 	angle.value = -M_PI / 2 - ANGLE_EPSILON;
-	EXPECT_EQ(3, angle.quadrant());
+	EXPECT_EQ(3, angle.getQuadrant());
 
 	angle.value = -ANGLE_EPSILON;
-	EXPECT_EQ(4, angle.quadrant());
+	EXPECT_EQ(4, angle.getQuadrant());
 	angle.value = -M_PI / 2 + ANGLE_EPSILON;
-	EXPECT_EQ(4, angle.quadrant());
+	EXPECT_EQ(4, angle.getQuadrant());
 }
 
 TEST(AngleTest, CompareTest) {
@@ -59,8 +59,8 @@ TEST(AngleTest, Times10Test) {
 }
 
 TEST(AngleTest, Normalize) {
-	assertDoubleEqual(M_PI, Angle::normalize(M_PI),  "Angle normalize PI is correct");
-	assertDoubleEqual(-M_PI, Angle::normalize(-M_PI),  "Angle normalize -PI is correct");
-	assertDoubleEqual(0.1 * M_PI, Angle::normalize(- 3.9 * M_PI), "Angle normalize -3.9 * PI is correct");
-	assertDoubleEqual(-0.9 * M_PI, Angle::normalize(13.1 * M_PI), "Angle normalize 13.1 * PI is correct");
+	assertDoubleEqual(M_PI, Angle::normalized(M_PI),  "Angle normalize PI is correct");
+	assertDoubleEqual(-M_PI, Angle::normalized(-M_PI),  "Angle normalize -PI is correct");
+	assertDoubleEqual(0.1 * M_PI, Angle::normalized(- 3.9 * M_PI), "Angle normalize -3.9 * PI is correct");
+	assertDoubleEqual(-0.9 * M_PI, Angle::normalized(13.1 * M_PI), "Angle normalize 13.1 * PI is correct");
 }

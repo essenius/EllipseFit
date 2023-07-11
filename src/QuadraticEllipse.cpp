@@ -28,7 +28,7 @@ bool QuadraticEllipse::isValid() const {
 	return _discriminant != 0;
 }
 
-Angle QuadraticEllipse::angle() const {
+Angle QuadraticEllipse::getAngle() const {
 	if (b == 0) {  // NOLINT(clang-diagnostic-float-equal) -- avoiding division by 0
 		return { (a < c ? 0 : M_PI / 2) };
 	}
@@ -37,11 +37,11 @@ Angle QuadraticEllipse::angle() const {
 	return { baseAngle };
 }
 
-Coordinate QuadraticEllipse::center() const {
+Coordinate QuadraticEllipse::getCenter() const {
 	return { (c * d - b * f) / _discriminant, (a * f - b * d) / _discriminant };
 }
 
-Coordinate QuadraticEllipse::radius() {
+Coordinate QuadraticEllipse::getRadius() {
 	const double numerator = 2 * (a * sqr(f) + c * sqr(d) + g * sqr(b) - 2 * b * d * f - a * c * g);
 	const double partialDenominator = sqrt(sqr(a - c) + 4 * sqr(b));
 	const double widthDenominator = _discriminant * (partialDenominator - (a + c));
