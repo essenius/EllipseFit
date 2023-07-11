@@ -22,7 +22,7 @@ struct QuadraticEllipse {
     Angle getAngle() const;
 	Coordinate getCenter() const;
     bool isValid() const;
-	Coordinate getRadius();
+	Coordinate getRadius() const;
 private:
 	double a{};
 	double b{};

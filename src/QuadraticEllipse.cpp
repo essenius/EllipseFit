@@ -41,7 +41,7 @@ Coordinate QuadraticEllipse::getCenter() const {
 	return { (c * d - b * f) / _discriminant, (a * f - b * d) / _discriminant };
 }
 
-Coordinate QuadraticEllipse::getRadius() {
+Coordinate QuadraticEllipse::getRadius() const {
 	const double numerator = 2 * (a * sqr(f) + c * sqr(d) + g * sqr(b) - 2 * b * d * f - a * c * g);
 	const double partialDenominator = sqrt(sqr(a - c) + 4 * sqr(b));
 	const double widthDenominator = _discriminant * (partialDenominator - (a + c));

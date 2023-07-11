@@ -17,7 +17,6 @@
 #include "MathUtils.h"
 
 bool Coordinate::operator==(const Coordinate& other) const {
-    //constexpr double EPSILON = 1e-6;
     return isAboutEqual(x, other.x) && isAboutEqual(y, other.y);
 }
 
