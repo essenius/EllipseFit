@@ -13,6 +13,7 @@
 
 #ifndef HEADER_ANGLE
 #define HEADER_ANGLE
+
 #include <cstdint>
 
 struct Angle {

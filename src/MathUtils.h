@@ -14,15 +14,15 @@
 #ifndef DOUBLE_UTILS_H
 #define DOUBLE_UTILS_H
 
-#ifdef WIN32
+#ifdef _WIN32
 // ReSharper disable once CppUnusedIncludeDirective - on purpose, to get M_PI defined.
 // And we don't want this conditional include proliferate.
 #include <corecrt_math_defines.h>
 #endif
 
-constexpr double EPSILON = 1e-4;
+constexpr double Epsilon = 1e-4;
 
-bool isAboutEqual(const double& a, const double& b, const double& epsilon = EPSILON);
+bool isAboutEqual(const double& a, const double& b, const double& epsilon = Epsilon);
 double sqr(const double& a);
 int modulo(int a, int b);
 double sign(const double& a);

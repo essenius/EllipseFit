@@ -1,0 +1,37 @@
+Angle	KEYWORD1
+getQuadrant	KEYWORD2
+normalized	KEYWORD2
+
+CartesianEllipse    KEYWORD1
+coefficient KEYWORD2
+center  KEYWORD2
+radius  KEYWORD2
+angle   KEYWORD2
+hasData KEYWORD2
+fitSucceeded    KEYWORD2
+getCircumference    KEYWORD2
+getDistanceFrom KEYWORD2
+getParametricRepresentation KEYWORD2
+getPointOnEllipseFor KEYWORD2
+
+Coordinate KEYWORD1
+x   KEYWORD2
+y   KEYWORD2
+getAngle    KEYWORD2
+getAngleFrom    KEYWORD2
+getDistance KEYWORD2
+getReciprocal   KEYWORD2
+rotated KEYWORD2
+scaled  KEYWORD2
+translated  KEYWORD2
+
+EllipseFit  KEYWORD1
+addMeasurement	KEYWORD2
+fit KEYWORD2
+bufferIsFull    KEYWORD2
+pointCount  KEYWORD2
+
+QuadraticEllipse KEYWORD1
+getCenter   KEYWORD2
+getRadius   KEYWORD2
+isValid KEYWORD2

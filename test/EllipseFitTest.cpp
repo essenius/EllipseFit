@@ -14,7 +14,7 @@
 #include "TestHelper.h"
 
 QuadraticEllipse EllipseFitTest::fitPerfectEllipse(EllipseFit& ellipseFit, const CartesianEllipse& inputEllipse) const {
-	const unsigned int pointsOnEllipse = EllipseFit::size();
+	const unsigned int pointsOnEllipse = EllipseFit::getSize();
 	ellipseFit.begin();
 	auto x = -M_PI;
 	EXPECT_FALSE(ellipseFit.bufferIsFull()) << "Buffer is not full";
@@ -35,17 +35,17 @@ void EllipseFitTest::assertPerfectEllipse(const Coordinate& center, const Coordi
 	const auto result = fitPerfectEllipse(ellipseFit, inputEllipse);
 	EXPECT_TRUE(result.isValid()) << "Result is valid";
 	const auto resultEllipse = CartesianEllipse(result);
-	assertCoordinatesEqual(center, resultEllipse.center, "Center", EPSILON);
-	assertCoordinatesEqual(radius, resultEllipse.radius, "Radius", EPSILON);
-	if (fabs(radius.x - radius.y) > EPSILON) assertAnglesEqual(angle, resultEllipse.angle, "Angle", EPSILON);
+	assertCoordinatesEqual(center, resultEllipse.center, "Center", Epsilon);
+	assertCoordinatesEqual(radius, resultEllipse.radius, "Radius", Epsilon);
+	if (fabs(radius.x - radius.y) > Epsilon) assertAnglesEqual(angle, resultEllipse.angle, "Angle", Epsilon);
 
 	// check if all points of the parametric representation of the result ellipse are on the original ellipse
 	auto x = -M_PI;
-	for (int i = -16; i < static_cast<int>(EllipseFit::size()); i++) {
+	for (int i = -16; i < static_cast<int>(EllipseFit::getSize()); i++) {
 		Coordinate pointOut = resultEllipse.getParametricRepresentation(Angle{x});
 		const auto distanceFromEllipse = inputEllipse.getDistanceFrom(pointOut);
 		assertDoubleEqual(0, distanceFromEllipse, "Distance", 0.0001);
-		x += M_PI / (EllipseFit::size() / 2.0);
+		x += M_PI / (EllipseFit::getSize() / 2.0);
 	}
 }
 
@@ -55,7 +55,7 @@ void EllipseFitTest::assertEllipseWithDistance(const Coordinate& center, const C
 	auto distancec = Coordinate{ distance, distance };
 	const auto innerEllipse = CartesianEllipse(center, radius.translated(-distancec), angle);
 	const auto outerEllipse = CartesianEllipse(center, radius.translated(distancec), angle);
-	const unsigned int pointsOnEllipse = EllipseFit::size();
+	const unsigned int pointsOnEllipse = EllipseFit::getSize();
 	EllipseFit ellipseFit;
 	ellipseFit.begin();
 	auto x = -M_PI;
@@ -75,9 +75,9 @@ void EllipseFitTest::assertEllipseWithDistance(const Coordinate& center, const C
 	const auto resultEllipse = CartesianEllipse(resultQuadraticEllipse);
 
 	x = -M_PI;
-	assertCoordinatesEqual(center, resultEllipse.center, "Center", EPSILON);
+	assertCoordinatesEqual(center, resultEllipse.center, "Center", Epsilon);
 	assertCoordinatesEqual(radius, resultEllipse.radius, "Radius", 0.01);
-	if (fabs(radius.x - radius.y) > EPSILON) assertAnglesEqual(angle, resultEllipse.angle, "Angle", EPSILON);
+	if (fabs(radius.x - radius.y) > Epsilon) assertAnglesEqual(angle, resultEllipse.angle, "Angle", Epsilon);
 
 	const auto middleEllipse = CartesianEllipse(center, radius, angle);
 
@@ -90,7 +90,7 @@ void EllipseFitTest::assertEllipseWithDistance(const Coordinate& center, const C
 
 void EllipseFitTest::assertPartialEllipse(const CartesianEllipse& ellipse, const double& fraction, const double &startAngle) const {
 
-	const unsigned int points = EllipseFit::size();
+	const unsigned int points = EllipseFit::getSize();
 	EllipseFit ellipseFit;
 	ellipseFit.begin();
 	const double delta = M_PI * 2.0 * fraction / points;
@@ -109,10 +109,10 @@ void EllipseFitTest::assertPartialEllipse(const CartesianEllipse& ellipse, const
 	const auto resultEllipse = CartesianEllipse(resultQuadraticEllipse);
 
 	// we need to accept a bit more variation here 
-	constexpr double EPSILON1 = 0.01;
-	assertCoordinatesEqual(ellipse.center, resultEllipse.center, "Center", EPSILON1);
-	assertCoordinatesEqual(ellipse.radius, resultEllipse.radius, "Radius", EPSILON1);
-	if (fabs(ellipse.radius.x - ellipse.radius.y) > EPSILON) assertAnglesEqual(ellipse.angle, resultEllipse.angle, "Angle", EPSILON1);
+	constexpr double Epsilon1 = 0.01;
+	assertCoordinatesEqual(ellipse.center, resultEllipse.center, "Center", Epsilon1);
+	assertCoordinatesEqual(ellipse.radius, resultEllipse.radius, "Radius", Epsilon1);
+	if (fabs(ellipse.radius.x - ellipse.radius.y) > Epsilon) assertAnglesEqual(ellipse.angle, resultEllipse.angle, "Angle", Epsilon1);
 
 	x = -M_PI;
 	constexpr int POINTS_ON_ELLIPSE = 32;
@@ -143,7 +143,7 @@ TEST_F(EllipseFitTest, PerfectFitEllipseCloseToMeasured) {
 }
 
 TEST_F(EllipseFitTest, PerfectLineShouldNotFit) {
-	auto inputEllipse = CartesianEllipse({0,0}, {10,0}, {M_PI / 3});
+	const auto inputEllipse = CartesianEllipse({0,0}, {10,0}, {M_PI / 3});
 	EllipseFit ellipseFit;
 	const auto result = fitPerfectEllipse(ellipseFit, inputEllipse);
 	EXPECT_FALSE(result.isValid()) << "Samples forming a line should not return a match";
@@ -165,7 +165,7 @@ TEST_F(EllipseFitTest, PartialEllipseTest) {
 TEST_F(EllipseFitTest, AllZeroSamples) {
 	EllipseFit ellipseFit;
 	ellipseFit.begin();
-	ASSERT_EQ(32, ellipseFit.size()) << "Size OK";
+	ASSERT_EQ(32, ellipseFit.getSize()) << "Size OK";
 	for (unsigned int i = 0; i < 32; i++) {
 		ASSERT_TRUE(ellipseFit.addMeasurement(0, 0)) << "Point " << i << " added";
 	}

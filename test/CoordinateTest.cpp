@@ -12,6 +12,7 @@
 #include <gtest/gtest.h>
 
 #include "Coordinate.h"
+#include "MathUtils.h"
 
 bool coordinateEqual(const Coordinate& a, const Coordinate& b) {
 	return a == b;

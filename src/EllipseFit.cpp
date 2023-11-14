@@ -17,17 +17,17 @@
 // optimized version of https://github.com/mericdurukan/ellipse-fitting
 
 // fixed buffer size as we don't want to fragment the heap
-constexpr unsigned int EllipseFit::BUFFER_SIZE;  // NOLINT(readability-redundant-declaration) -- using C++ 11 on device
+constexpr unsigned int EllipseFit::BufferSize;  // NOLINT(readability-redundant-declaration) -- using C++ 11 on device
 
 EllipseFit::EllipseFit() {
 	// Calculating the constant vectors/matrices once to save a bit of time when fitting
-	Matrix c1({{0, 0, 2},{ 0, -1, 0},{ 2, 0, 0}});
-	_c1Inverse = c1.inverse();
+	const Matrix c1({{0, 0, 2},{ 0, -1, 0},{ 2, 0, 0}});
+	_c1Inverse = c1.inverted();
 	_design2.setColumn(2, 1); // set the last column to all ones
 }
 
 bool EllipseFit::addMeasurement(double x, double y) {
-	if (_size >= BUFFER_SIZE) return false;
+	if (_size >= BufferSize) return false;
 	// Design matrix (D in the article). Building up incrementally to minimize compute at fit
 	_design1( _size, 0) = x * x;
 	_design1(_size, 1) = x * y;
@@ -49,9 +49,9 @@ void EllipseFit::begin() {
 QuadraticEllipse EllipseFit::fit() const {
 
     // Scatter matrix (S in the article)
- 	const Matrix scatter1 = _design1.transpose() * _design1;
-	const Matrix scatter2 = _design1.transpose() * _design2;
-	const Matrix scatter3 = _design2.transpose() * _design2;
+ 	const Matrix scatter1 = _design1.transposed() * _design1;
+	const Matrix scatter2 = _design1.transposed() * _design2;
+	const Matrix scatter3 = _design2.transposed() * _design2;
 
 	if (!scatter3.isInvertible()) {
 		// if the scatter matrix is not invertible, we can't fit an ellipse
@@ -59,7 +59,7 @@ QuadraticEllipse EllipseFit::fit() const {
 	}
 
 	// reduced scatter matrix (M in the article)
-	const auto reducedScatter = SolverMatrix(_c1Inverse * (scatter1 - scatter2 * scatter3.inverse() * scatter2.transpose()));
+	const auto reducedScatter = SolverMatrix(_c1Inverse * (scatter1 - scatter2 * scatter3.inverted() * scatter2.transposed()));
 
 	const auto eigenvectors = reducedScatter.getEigenvectors();
 
@@ -72,7 +72,7 @@ QuadraticEllipse EllipseFit::fit() const {
 	// there should be one where the condition is positive, that's the one we need
 
 	auto found = false;
-	for (int eigenVectorIndex = 0; eigenVectorIndex < condition.columns(); eigenVectorIndex++) {
+	for (int eigenVectorIndex = 0; eigenVectorIndex < condition.columnCount(); eigenVectorIndex++) {
 		if (condition(0, eigenVectorIndex) > 0) {
 			a1 = Matrix(eigenvectors.getColumn(eigenVectorIndex));
 			found = true;
@@ -85,7 +85,7 @@ QuadraticEllipse EllipseFit::fit() const {
 			return {0, 0, 0, 0, 0, 0};
 	}
 
-    const auto a2 = -1 * scatter3.inverse() * scatter2.transpose() * a1;
+    const auto a2 = -1 * scatter3.inverted() * scatter2.transposed() * a1;
 
 	return {a1(0,0), a1(1,0), a1(2,0), a2(0,0), a2(1,0), a2(2,0)};
 }

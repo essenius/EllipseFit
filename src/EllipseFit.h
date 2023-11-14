@@ -27,15 +27,15 @@ public:
 	bool addMeasurement(const Coordinate& point);
 	void begin();
 	QuadraticEllipse fit() const;
-	bool bufferIsFull() const { return _size >= BUFFER_SIZE; }
+	bool bufferIsFull() const { return _size >= BufferSize; }
 	unsigned int pointCount() const { return _size; }
-    static unsigned int size() { return BUFFER_SIZE; }
+    static unsigned int getSize() { return BufferSize; }
 
 private:
-	static constexpr unsigned int BUFFER_SIZE = 32;
+	static constexpr unsigned int BufferSize = 32;
 	Matrix _c1Inverse {3, 3};
-	Matrix _design1 {BUFFER_SIZE, 3};
-	Matrix _design2 {BUFFER_SIZE, 3};
+	Matrix _design1 {BufferSize, 3};
+	Matrix _design2 {BufferSize, 3};
 
 	unsigned int _size = 0;
 };

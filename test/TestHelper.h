@@ -16,8 +16,8 @@
 #include "MathUtils.h"
 #include "Coordinate.h"
 
-void assertDoubleEqual(const double& a, const double& b, const std::string& label, const double& epsilon = EPSILON);
-void assertCoordinatesEqual(const Coordinate& a, const Coordinate& b, const std::string& label, const double& epsilon = EPSILON);
-void assertAnglesEqual(const Angle& a, const Angle& b, const std::string& label, const double& epsilon = EPSILON);
+void assertDoubleEqual(const double& a, const double& b, const std::string& label, const double& epsilon = Epsilon);
+void assertCoordinatesEqual(const Coordinate& a, const Coordinate& b, const std::string& label, const double& epsilon = Epsilon);
+void assertAnglesEqual(const Angle& a, const Angle& b, const std::string& label, const double& epsilon = Epsilon);
 
 #endif

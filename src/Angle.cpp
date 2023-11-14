@@ -19,7 +19,7 @@ Angle Angle::operator-(const Angle &other) const {
 }
 
 double Angle::operator- (const double& other) const {
-	auto returnValue = value - other;
+	const auto returnValue = value - other;
 	return normalized(returnValue);
 }
 

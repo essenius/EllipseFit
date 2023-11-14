@@ -24,7 +24,7 @@ CartesianEllipse::CartesianEllipse(const QuadraticEllipse& quadraticEllipse): co
 }
 
 bool CartesianEllipse::fitSucceeded() const {
-	return radius.getDistance() > EPSILON;
+	return radius.getDistance() > Epsilon;
 }
 
 double CartesianEllipse::getCircumference() const {

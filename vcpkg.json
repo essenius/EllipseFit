@@ -1,0 +1,8 @@
+{
+  "dependencies": [
+    {
+        "name": "rix-matrix",
+        "version>=": "0.1.0"
+    }
+  ]
+}

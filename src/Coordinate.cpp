@@ -11,7 +11,6 @@
 
 // ReSharper disable CppClangTidyClangDiagnosticFloatEqual - comparison is done to avoid division by 0.
 
-#include <cstdio>
 #include <cmath>
 #include "Coordinate.h"
 #include "MathUtils.h"
