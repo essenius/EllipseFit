@@ -15,25 +15,25 @@
 #include "Angle.h"
 
 TEST(AngleTest, QuadrantTest) {
-	constexpr double ANGLE_EPSILON = 0.001;
-	auto angle = Angle{ ANGLE_EPSILON };
+	constexpr double AngleEpsilon = 0.001;
+	auto angle = Angle{ AngleEpsilon };
     EXPECT_EQ(1, angle.getQuadrant());
-	angle.value = M_PI / 2 - ANGLE_EPSILON;
+	angle.value = M_PI / 2 - AngleEpsilon;
 	EXPECT_EQ(1, angle.getQuadrant());
 
-	angle.value = M_PI - ANGLE_EPSILON;
+	angle.value = M_PI - AngleEpsilon;
 	EXPECT_EQ(2, angle.getQuadrant());
-	angle.value = M_PI / 2 + ANGLE_EPSILON;
+	angle.value = M_PI / 2 + AngleEpsilon;
 	EXPECT_EQ(2, angle.getQuadrant());
 
-	angle.value = -M_PI + ANGLE_EPSILON;
+	angle.value = -M_PI + AngleEpsilon;
 	EXPECT_EQ(3, angle.getQuadrant());
-	angle.value = -M_PI / 2 - ANGLE_EPSILON;
+	angle.value = -M_PI / 2 - AngleEpsilon;
 	EXPECT_EQ(3, angle.getQuadrant());
 
-	angle.value = -ANGLE_EPSILON;
+	angle.value = -AngleEpsilon;
 	EXPECT_EQ(4, angle.getQuadrant());
-	angle.value = -M_PI / 2 + ANGLE_EPSILON;
+	angle.value = -M_PI / 2 + AngleEpsilon;
 	EXPECT_EQ(4, angle.getQuadrant());
 }
 

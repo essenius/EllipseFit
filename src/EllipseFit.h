@@ -23,7 +23,7 @@ class EllipseFit {
 
 public: 
 	explicit EllipseFit();
-	bool addMeasurement(const double x, const double y);
+	bool addMeasurement(double x, double y);
 	bool addMeasurement(const Coordinate& point);
 	void begin();
 	QuadraticEllipse fit() const;

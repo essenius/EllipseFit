@@ -19,15 +19,15 @@ bool coordinateEqual(const Coordinate& a, const Coordinate& b) {
 }
 
 TEST(CoordinateTest, AngleDistance) {
-	constexpr Coordinate BASE{ 4, 4 };
-	ASSERT_DOUBLE_EQ(M_PI / 4, BASE.getAngle().value) << "Angle OK";
-	ASSERT_DOUBLE_EQ(sqrt(32), BASE.getDistance()) << "Distance OK";
+	constexpr Coordinate Base{ 4, 4 };
+	ASSERT_DOUBLE_EQ(M_PI / 4, Base.getAngle().value) << "Angle OK";
+	ASSERT_DOUBLE_EQ(sqrt(32), Base.getDistance()) << "Distance OK";
 }
 
 TEST(CoordinateTest, AngleFromDistanceFrom) {
-	constexpr Coordinate BASE{ 4, 4 };
-	ASSERT_DOUBLE_EQ(5, BASE.getDistanceFrom({ 0, 7 })) << "DistanceFrom OK";
-	ASSERT_DOUBLE_EQ(-M_PI / 4, BASE.getAngleFrom({ -4, 12 }).value) << "AngleFrom OK";
+	constexpr Coordinate Base{ 4, 4 };
+	ASSERT_DOUBLE_EQ(5, Base.getDistanceFrom({ 0, 7 })) << "DistanceFrom OK";
+	ASSERT_DOUBLE_EQ(-M_PI / 4, Base.getAngleFrom({ -4, 12 }).value) << "AngleFrom OK";
 }
 
 TEST(CoordinateTest, AngleOfZeroIsNotDefined) {
@@ -35,31 +35,31 @@ TEST(CoordinateTest, AngleOfZeroIsNotDefined) {
 }
 
 TEST(CoordinateTest, Equal) {
-	constexpr Coordinate BASE{ 4, 4 };
-	ASSERT_TRUE(coordinateEqual(BASE, BASE)) << "Equal to itself";
-	ASSERT_TRUE(coordinateEqual(Coordinate{ 4,4 }, BASE)) << "Equal to a coordinate with the same values";
-	constexpr Coordinate OTHER{ 0, 7 };
-	ASSERT_FALSE(coordinateEqual(OTHER,  BASE)) << "Coordinates 1 and 2 not equal";
-	ASSERT_FALSE(coordinateEqual(Coordinate{ 4, -4 }, BASE)) << "Not equal to a coordinate with a different Y value";
-	ASSERT_FALSE(coordinateEqual(Coordinate{ -4, 4 }, BASE)) << "Not equal to a coordinate with a different X value";
+	constexpr Coordinate Base{ 4, 4 };
+	ASSERT_TRUE(coordinateEqual(Base, Base)) << "Equal to itself";
+	ASSERT_TRUE(coordinateEqual(Coordinate{ 4,4 }, Base)) << "Equal to a coordinate with the same values";
+	constexpr Coordinate Other{ 0, 7 };
+	ASSERT_FALSE(coordinateEqual(Other,  Base)) << "Coordinates 1 and 2 not equal";
+	ASSERT_FALSE(coordinateEqual(Coordinate{ 4, -4 }, Base)) << "Not equal to a coordinate with a different Y value";
+	ASSERT_FALSE(coordinateEqual(Coordinate{ -4, 4 }, Base)) << "Not equal to a coordinate with a different X value";
 }
 
 TEST(CoordinateTest, Rotate) {
-	constexpr Coordinate BASE{ 4, 4 };
-	ASSERT_TRUE(coordinateEqual(Coordinate{ 4, -4 }, BASE.rotated(-M_PI / 2))) << "Rotate OK";
+	constexpr Coordinate Base{ 4, 4 };
+	ASSERT_TRUE(coordinateEqual(Coordinate{ 4, -4 }, Base.rotated(-M_PI / 2))) << "Rotate OK";
 }
 
 TEST(CoordinateTest, Translate) {
-	constexpr Coordinate BASE{ 4, 4 };
-	ASSERT_TRUE(coordinateEqual(Coordinate{ 0, 16 }, BASE.translated({-4, 12}))) << "Translate OK";
+	constexpr Coordinate Base{ 4, 4 };
+	ASSERT_TRUE(coordinateEqual(Coordinate{ 0, 16 }, Base.translated({-4, 12}))) << "Translate OK";
 }
 
 TEST(CoordinateTest, Scale) {
-	constexpr Coordinate BASE{ 4, 4 };
-	ASSERT_TRUE(coordinateEqual(Coordinate{ 0.5, 8 }, BASE.scaled({0.125, 2}))) << "Scaled OK";
+	constexpr Coordinate Base{ 4, 4 };
+	ASSERT_TRUE(coordinateEqual(Coordinate{ 0.5, 8 }, Base.scaled({0.125, 2}))) << "Scaled OK";
 }
 
 TEST(CoordinateTest, Reciprocal) {
-	constexpr Coordinate BASE{ 0.5, 8 };
-	ASSERT_TRUE(coordinateEqual(Coordinate{ 2, 0.125 }, BASE.getReciprocal())) << "Reciproke OK";
+	constexpr Coordinate Base{ 0.5, 8 };
+	ASSERT_TRUE(coordinateEqual(Coordinate{ 2, 0.125 }, Base.getReciprocal())) << "Reciproke OK";
 }

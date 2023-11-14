@@ -27,7 +27,7 @@ QuadraticEllipse makeEllipse(const Coordinate& center, const Coordinate& radius,
 }
 
 void assertEllipse(const Coordinate& center, const Coordinate& radius, const Angle& angle) {
-	auto coefficient = makeEllipse(center, radius, angle);
+	const auto coefficient = makeEllipse(center, radius, angle);
 
 	assertAnglesEqual(angle, coefficient.getAngle(), "Angle");
 	const auto center1 = coefficient.getCenter();

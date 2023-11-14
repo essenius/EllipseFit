@@ -30,7 +30,7 @@ QuadraticEllipse EllipseFitTest::fitPerfectEllipse(EllipseFit& ellipseFit, const
 }
 
 void EllipseFitTest::assertPerfectEllipse(const Coordinate& center, const Coordinate& radius, const Angle& angle) const {
-	auto inputEllipse = CartesianEllipse(center, radius, angle);
+	const auto inputEllipse = CartesianEllipse(center, radius, angle);
 	EllipseFit ellipseFit;
 	const auto result = fitPerfectEllipse(ellipseFit, inputEllipse);
 	EXPECT_TRUE(result.isValid()) << "Result is valid";

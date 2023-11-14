@@ -74,11 +74,11 @@ TEST(CartesianEllipseTest, PointOnEllipseForTest) {
 	const auto quadraticEllipse = QuadraticEllipse(106.75, 57.157677, 139.75, 7055.59545, 13777.81121, 369982.9419);
 	const auto cartesianEllipse = CartesianEllipse(quadraticEllipse);
 	assertAnglesEqual(Angle{-M_PI / 6}, cartesianEllipse.angle, "Angle");
-	constexpr auto ORIGIN = Coordinate{ 0, 0 };
-	const auto originMap = cartesianEllipse.getPointOnEllipseFor(ORIGIN);
+	constexpr auto Origin = Coordinate{ 0, 0 };
+	const auto originMap = cartesianEllipse.getPointOnEllipseFor(Origin);
 	assertCoordinatesEqual(Coordinate{ -16.9761709, -36.377509 }, originMap, "Origin mapped on ellipse");
 
-	assertDoubleEqual(40.143662, cartesianEllipse.getDistanceFrom(ORIGIN), "Distance from origin");
+	assertDoubleEqual(40.143662, cartesianEllipse.getDistanceFrom(Origin), "Distance from origin");
 	constexpr auto POINT_IN_ELLIPSE = Coordinate{ -25, -40 };
 	const auto pointInEllpseMap = cartesianEllipse.getPointOnEllipseFor(POINT_IN_ELLIPSE);
 	assertCoordinatesEqual(Coordinate{ -28.455996, -35.680005 }, pointInEllpseMap, "Point inside ellipse mapped on ellipse");

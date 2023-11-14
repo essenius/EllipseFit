@@ -26,7 +26,7 @@ EllipseFit::EllipseFit() {
 	_design2.setColumn(2, 1); // set the last column to all ones
 }
 
-bool EllipseFit::addMeasurement(double x, double y) {
+bool EllipseFit::addMeasurement(const double x, const double y) {
 	if (_size >= BufferSize) return false;
 	// Design matrix (D in the article). Building up incrementally to minimize compute at fit
 	_design1( _size, 0) = x * x;
