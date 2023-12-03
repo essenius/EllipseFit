@@ -13,7 +13,7 @@
 #define ELLIPSEFITTEST_H
 
 #include "gtest/gtest.h"
-#include "CartesianEllipse.h"
+#include "CartesianEllipseDriver.h"
 #include "EllipseFit.h"
 
 class EllipseFitTest : public ::testing::Test {
@@ -21,6 +21,6 @@ protected:
     QuadraticEllipse fitPerfectEllipse(EllipseFit& ellipseFit, const CartesianEllipse& inputEllipse) const;
     void assertPerfectEllipse(const Coordinate& center, const Coordinate& radius, const Angle& angle) const;
     void assertEllipseWithDistance(const Coordinate& center, const Coordinate& radius, const Angle& angle, const double& distance) const;
-    void assertPartialEllipse(const CartesianEllipse& ellipse, const double& fraction, const double &startAngle) const;
+    void assertPartialEllipse(const CartesianEllipseDriver& ellipse, const double& fraction, const double &startAngle) const;
 };
 #endif

@@ -11,12 +11,15 @@
 
 // The fitting process delivers coefficients. This class translates those to coordinates (center, radius, and angle of main radius).
 
+// ReSharper disable CppInconsistentNaming - following the naming convention of the coefficients in the ellipse equation
+
 #ifndef QUADRATIC_ELLIPSE_H
 #define QUADRATIC_ELLIPSE_H
 
 #include "Coordinate.h"
 
-struct QuadraticEllipse {
+class QuadraticEllipse {
+public:
 	/**
 	 * \brief Construct a QuadraticEllipse from the coefficients of the equation ax^2 + bxy + cy^2 + dx + fy + g = 0.
      */

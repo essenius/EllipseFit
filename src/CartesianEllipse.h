@@ -24,12 +24,8 @@
 #include "QuadraticEllipse.h"
 #include "Coordinate.h"
 
-struct CartesianEllipse {
-	QuadraticEllipse coefficient{};
-	Coordinate center{};
-	Coordinate radius{};
-	Angle angle{};
-	bool hasData = false;
+class CartesianEllipse {
+public:
 
 	CartesianEllipse() = default;
 	CartesianEllipse(const Coordinate& center, const Coordinate& radius, const Angle& angle);
@@ -60,6 +56,13 @@ struct CartesianEllipse {
 	*/
 	bool isValid() const;
 
+// compromise between encapsulation and testability: make the data members protected so we can expose them in a driver subclass
+protected:
+	QuadraticEllipse _coefficient{};
+	Coordinate _center{};
+	Coordinate _radius{};
+	Angle _angle{};
+	bool _hasData = false;
 
 };
 #endif

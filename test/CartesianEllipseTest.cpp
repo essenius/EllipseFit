@@ -13,67 +13,67 @@
 
 #include "MathUtils.h"
 #include "TestHelper.h"
-#include "CartesianEllipse.h"
+#include "CartesianEllipseDriver.h"
 
 TEST(CartesianEllipseTest, RotatedTranslatedEllipseTest) {
 	const auto quadraticEllipse = QuadraticEllipse(26, 20, 26, -772, -740, 7370);
-	const auto cartesianEllipse = CartesianEllipse(quadraticEllipse);
-	const auto center = cartesianEllipse.center;
+	const auto cartesianEllipse = CartesianEllipseDriver(quadraticEllipse);
+	const auto center = cartesianEllipse._center;
 	assertCoordinatesEqual(Coordinate{ 11,10 }, center, "Center");
-	const auto radius = cartesianEllipse.radius;
+	const auto radius = cartesianEllipse._radius;
 	assertCoordinatesEqual(Coordinate{ 6, 4 }, radius, "Radius");
-	const auto angle = cartesianEllipse.angle;
+	const auto angle = cartesianEllipse._angle;
 	assertAnglesEqual(Angle{-M_PI / 4}, angle, "Angle");
 }
 
 TEST(CartesianEllipseTest, PlainEllipseTest) {
 	const auto quadraticEllipse = QuadraticEllipse(1, 0, 4, 0, 0, -4);
-	const auto cartesianEllipse = CartesianEllipse(quadraticEllipse);
-	const auto center = cartesianEllipse.center;
+	const auto cartesianEllipse = CartesianEllipseDriver(quadraticEllipse);
+	const auto center = cartesianEllipse._center;
 	assertCoordinatesEqual(Coordinate{ 0, 0 }, center, "Center");
-	const auto radius = cartesianEllipse.radius;
+	const auto radius = cartesianEllipse._radius;
 	assertCoordinatesEqual(Coordinate{ 2, 1 }, radius, "Radius");
-	const auto angle = cartesianEllipse.angle;
+	const auto angle = cartesianEllipse._angle;
 	assertAnglesEqual(Angle{0}, angle, "Angle");
 }
 
 TEST(CartesianEllipseTest, TranslatedEllipseTest) {
 	const auto quadraticEllipse = QuadraticEllipse(4, 0, 9, 40, 72, 208);
-	const auto cartesianEllipse = CartesianEllipse(quadraticEllipse);
-	const auto center = cartesianEllipse.center;
+	const auto cartesianEllipse = CartesianEllipseDriver(quadraticEllipse);
+	const auto center = cartesianEllipse._center;
 	assertCoordinatesEqual(Coordinate{ -5, -4 }, center, "Center");
-	const auto radius = cartesianEllipse.radius;
+	const auto radius = cartesianEllipse._radius;
 	assertCoordinatesEqual(Coordinate{ 3, 2 }, radius, "Radius");
-	const auto angle = cartesianEllipse.angle;
+	const auto angle = cartesianEllipse._angle;
 	assertAnglesEqual(Angle{0}, angle, "Angle");
 }
 
 TEST(CartesianEllipseTest, RotatedEllipseTest) {
 	const auto quadraticEllipse = QuadraticEllipse(4.94128, -3.90916, 8.05872, 0, 0, -36);
-	const auto cartesianEllipse = CartesianEllipse(quadraticEllipse);
-	const auto center = cartesianEllipse.center;
+	const auto cartesianEllipse = CartesianEllipseDriver(quadraticEllipse);
+	const auto center = cartesianEllipse._center;
 	assertCoordinatesEqual(Coordinate{ 0, 0 }, center, "Center");
-	const auto radius = cartesianEllipse.radius;
+	const auto radius = cartesianEllipse._radius;
 	assertCoordinatesEqual(Coordinate{ 3, 2 }, radius, "Radius");
-	const auto angle = cartesianEllipse.angle;
+	const auto angle = cartesianEllipse._angle;
 	assertAnglesEqual(Angle{0.4488}, angle, "Angle");
 }
 
 TEST(CartesianEllipseTest, Rotated45EllipseTest) {
 	const auto quadraticEllipse = QuadraticEllipse(90.5, -19, 90.5, 0, 0, -8100);
-	const auto cartesianEllipse = CartesianEllipse(quadraticEllipse);
-	const auto center = cartesianEllipse.center;
+	const auto cartesianEllipse = CartesianEllipseDriver(quadraticEllipse);
+	const auto center = cartesianEllipse._center;
 	assertCoordinatesEqual(Coordinate{ 0, 0 }, center, "Center");
-	const auto radius = cartesianEllipse.radius;
+	const auto radius = cartesianEllipse._radius;
 	assertCoordinatesEqual(Coordinate{ 10, 9 }, radius, "Radius");
-	const auto angle = cartesianEllipse.angle;
+	const auto angle = cartesianEllipse._angle;
 	assertAnglesEqual(Angle{M_PI / 4}, angle, "Angle");
 }
 
 TEST(CartesianEllipseTest, PointOnEllipseForTest) {
 	const auto quadraticEllipse = QuadraticEllipse(106.75, 57.157677, 139.75, 7055.59545, 13777.81121, 369982.9419);
-	const auto cartesianEllipse = CartesianEllipse(quadraticEllipse);
-	assertAnglesEqual(Angle{-M_PI / 6}, cartesianEllipse.angle, "Angle");
+	const auto cartesianEllipse = CartesianEllipseDriver(quadraticEllipse);
+	assertAnglesEqual(Angle{-M_PI / 6}, cartesianEllipse._angle, "Angle");
 	constexpr auto Origin = Coordinate{ 0, 0 };
 	const auto originMap = cartesianEllipse.getPointOnEllipseClosestTo(Origin);
 	assertCoordinatesEqual(Coordinate{ -16.9761709, -36.377509 }, originMap, "Origin mapped on ellipse");
@@ -88,10 +88,10 @@ TEST(CartesianEllipseTest, PointOnEllipseForTest) {
 TEST(CartesianEllipseTest, CircleCircumferenceTest) {
 	// circle with a diameter of 100 - we can calculate the exact circumference
 	const auto quadraticCircle = QuadraticEllipse(100, 0, 100, 0, 0, -10000);
-	const auto cartesianCircle = CartesianEllipse(quadraticCircle);
-	assertDoubleEqual(2 * M_PI * cartesianCircle.radius.x, cartesianCircle.getCircumference(), "Circumference");
+	const auto cartesianCircle = CartesianEllipseDriver(quadraticCircle);
+	assertDoubleEqual(2 * M_PI * cartesianCircle._radius.x, cartesianCircle.getCircumference(), "Circumference");
 	// now we're at it, see if angle doesn't crash and burn
-	const auto angle = cartesianCircle.angle;
+	const auto angle = cartesianCircle._angle;
 	assertAnglesEqual(Angle{M_PI / 2}, angle, "Circle angle");
 }
 
