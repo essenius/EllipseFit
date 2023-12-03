@@ -6,6 +6,7 @@ and with that be able to count pulses corresponding to water usage.
 ## Configuration and structure
 
 This library is designed to be usable both in the Arduino IDE as well as in a C++ project. It is structured as follows:
+
 	- `src/` contains the source files (this is where Arduino IDE expects them)
 	- `test/` contains the test cases
 	- `examples/` contains an example sketch for Arduino
