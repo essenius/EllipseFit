@@ -23,12 +23,41 @@ class EllipseFit {
 
 public: 
 	explicit EllipseFit();
+
+	/**
+	 * \brief Add a point to the buffer
+	 */
 	bool addMeasurement(double x, double y);
+
+	/**
+	 * \brief Add a point to the buffer
+	 */
 	bool addMeasurement(const Coordinate& point);
+
+	/**
+	 * \brief Initialize a new fit
+	 */
 	void begin();
+
+	/**
+	 * \brief When the buffer is full, call this method to execute a fit.
+	 * \returns the fitted ellipse
+	 */
 	QuadraticEllipse fit() const;
+
+	/**
+	 * \returns whether the buffer is full
+	 */
 	bool bufferIsFull() const { return _size >= BufferSize; }
-	unsigned int pointCount() const { return _size; }
+
+	/**
+	 * \returns the number of points in the buffer
+	 */
+	unsigned int getPointCount() const { return _size; }
+
+	/**
+	 * \returns the size of the buffer
+	 */
     static unsigned int getSize() { return BufferSize; }
 
 private:

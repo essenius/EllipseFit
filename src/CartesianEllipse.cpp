@@ -23,22 +23,21 @@ CartesianEllipse::CartesianEllipse(const QuadraticEllipse& quadraticEllipse): co
 	angle = coefficient.getAngle();
 }
 
-bool CartesianEllipse::fitSucceeded() const {
-	return radius.getDistance() > Epsilon;
-}
-
 double CartesianEllipse::getCircumference() const {
 
 	// approximation, not so easy to determine precisely.
 	// See https://www.johndcook.com/blog/2013/05/05/ramanujan-circumference-ellipse/
     const auto t = 3 * sqr((radius.x - radius.y) / (radius.x + radius.y));
 	return M_PI * (radius.x + radius.y) * (1 + t / (10 + sqrt(4 - t)));
-
 }
 
-Coordinate CartesianEllipse::getParametricRepresentation(const Angle& referenceAngle) const {
+double CartesianEllipse::getDistanceFrom(const Coordinate& referencePoint) const {
+	return getPointOnEllipseClosestTo(referencePoint).getDistanceFrom(referencePoint);
+}
+
+Coordinate CartesianEllipse::getPointOnEllipseAtAngle(const Angle& referenceAngle) const {
 	// Note the angle is relative to the center of the ellipse, not the origin 
-	return Coordinate {
+	return Coordinate{
 		center.x + radius.x * cos(referenceAngle.value) * cos(angle.value) -
 		radius.y * sin(referenceAngle.value) * sin(angle.value),
 		center.y + radius.y * sin(referenceAngle.value) * cos(angle.value) +
@@ -46,16 +45,16 @@ Coordinate CartesianEllipse::getParametricRepresentation(const Angle& referenceA
 	};
 }
 
-Coordinate CartesianEllipse::getPointOnEllipseFor(const Coordinate& referencePoint) const {
+Coordinate CartesianEllipse::getPointOnEllipseClosestTo(const Coordinate& referencePoint) const {
 	// Normalize the point, then find the angle with the origin. This gives the angle that parametricRepresentation needs.
 	const auto transformedCoordinate = referencePoint
 		.translated(-center)
 		.rotated(-angle.value)
 		.scaled(radius.getReciprocal());
 	const auto angleWithOrigin = transformedCoordinate.getAngle();
-	return getParametricRepresentation(angleWithOrigin);
+	return getPointOnEllipseAtAngle(angleWithOrigin);
 }
 
-double CartesianEllipse::getDistanceFrom(const Coordinate& referencePoint) const {
-	return getPointOnEllipseFor(referencePoint).getDistanceFrom(referencePoint);
+bool CartesianEllipse::isValid() const {
+	return radius.x > 0 && radius.y > 0;
 }

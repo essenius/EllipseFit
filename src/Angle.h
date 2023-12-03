@@ -18,12 +18,34 @@
 
 struct Angle {
 	double value;
-	double cos() const;
+
+	/**
+	 * \return the cosine of the angle
+	 */
+	double cos() const;	 
+	
+	/**
+	 * \return the angle in degrees * 10 (to avoid floating point)
+	 */
 	int16_t degreesTimes10() const;
-    Angle operator-(const Angle& other) const;
+    
+	Angle operator-(const Angle& other) const;
+	
 	double operator-(const double& other) const;
-	unsigned int getQuadrant() const;
+	
+	/** 
+	* \return the quadrant of the angle (1, 2, 3 or 4)
+	*/
+    unsigned int getQuadrant() const;
+
+	/**
+	 * \return the normalized angle in radians (between -PI and	PI)
+	 */
 	static double normalized(const double& value);
+
+	/**
+	* \return the sine of the angle
+	*/
 	double sin() const;
 };
 #endif

@@ -17,12 +17,33 @@
 #include "Coordinate.h"
 
 struct QuadraticEllipse {
+	/**
+	 * \brief Construct a QuadraticEllipse from the coefficients of the equation ax^2 + bxy + cy^2 + dx + fy + g = 0.
+     */
 	QuadraticEllipse(const double& a1, const double& b1, const double& c1, const double& d1, const double& f1, const double& g1);
+
     QuadraticEllipse() = default;
+
+	/**
+	 * \returns the angle of the main radius of the ellipse 
+	 */
     Angle getAngle() const;
+
+	/**
+	 * \returns the center of the ellipse
+	 */
 	Coordinate getCenter() const;
-    bool isValid() const;
+
+	/**
+	 * \returns the radius of the ellipse
+	 */
 	Coordinate getRadius() const;
+
+	/**
+	 * \returns whether the ellipse is valid
+	 */
+	bool isValid() const;
+
 private:
 	double a{};
 	double b{};

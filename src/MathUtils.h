@@ -22,8 +22,23 @@
 
 constexpr double Epsilon = 1e-4;
 
+/**
+ * \returns whether two doubles are about equal (up to a given epsilon)
+ */
 bool isAboutEqual(const double& a, const double& b, const double& epsilon = Epsilon);
+
+/**
+ * \returns the square of a double
+ */
 double sqr(const double& a);
+
+/**
+ * \returns	a modulo b, but with a positive result (unlike the % operator)
+ */
 int modulo(int a, int b);
+
+/**
+ * \returns the sign of a number (-1, 0, or 1)
+ */
 double sign(const double& a);
 #endif

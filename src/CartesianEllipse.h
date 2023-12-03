@@ -25,20 +25,41 @@
 #include "Coordinate.h"
 
 struct CartesianEllipse {
-	QuadraticEllipse coefficient {};
-	Coordinate center {};
-	Coordinate radius {};
-	Angle angle {};
+	QuadraticEllipse coefficient{};
+	Coordinate center{};
+	Coordinate radius{};
+	Angle angle{};
 	bool hasData = false;
 
 	CartesianEllipse() = default;
 	CartesianEllipse(const Coordinate& center, const Coordinate& radius, const Angle& angle);
 	explicit CartesianEllipse(const QuadraticEllipse& quadraticEllipse);
 
-	bool fitSucceeded() const;
+	/** 
+	* \returns an approximation of the circumference of the ellipse
+	*/
 	double getCircumference() const;
+
+	/**
+	* \returns the distance between the ellipse and a point
+	*/
 	double getDistanceFrom(const Coordinate& referencePoint) const;
-	Coordinate getParametricRepresentation(const Angle& referenceAngle) const;
-	Coordinate getPointOnEllipseFor(const Coordinate& referencePoint) const;
+
+	/**
+	* \returns the point on the ellipse for a given angle (relative to the center of the ellipse, not the origin)
+	*/
+	Coordinate getPointOnEllipseAtAngle(const Angle& referenceAngle) const;
+
+	/**
+	* \returns the point on the ellipse closest to a given point
+	*/
+	Coordinate getPointOnEllipseClosestTo(const Coordinate& referencePoint) const;
+
+	/**
+	* \returns whether the ellipse is valid
+	*/
+	bool isValid() const;
+
+
 };
 #endif

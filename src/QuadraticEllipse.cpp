@@ -14,7 +14,8 @@
 #include "QuadraticEllipse.h"
 
 // we use the base formula from https://mathworld.wolfram.com/CartesianEllipse.html: ax^2 + 2bxy + cy^2 + 2dx + 2fy + g = 0
-// we expect the constructor to deliver based on ax^2 + bxy + cy^2 + dx + fy + g = 0
+// as that makes the math a bit simpler.
+// we expect the constructor to deliver coordinates based on ax^2 + bxy + cy^2 + dx + fy + g = 0
 // See also https://scipython.com/blog/direct-linear-least-squares-fitting-of-an-ellipse/
 
 // we use a, b, c, d, f, g as Wolfram does that too - probably to not use e, which can cause confusion with the mathematical entity
