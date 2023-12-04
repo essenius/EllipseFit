@@ -85,7 +85,7 @@ A couple of math utilities that are used by multiple classes:
 An ellipse specified by coordinates.
 
 - The constructor expects parameters `a`, `b`, `c`, `d`, `f` and `g` of the formula `ax^2 + bxy + cy^2 + dx + fy + g = 0`.
-Internally it converts this to the [Wolfram formula](https://mathworld.wolfram.com/CartesianEllipse.html): `ax^2 + 2bxy + cy^2 + 2dx + 2fy + g = 0` as that makes the math a bit simpler.
+Internally it converts this to the [Wolfram formula](https://mathworld.wolfram.com/QuadraticCurve.html): `ax^2 + 2bxy + cy^2 + 2dx + 2fy + g = 0` as that makes the math a bit simpler.
 - `getAngle()`: the angle of the main radius of the ellipse
 - `getCenter()`: the center of the ellipse
 - `getRadius()`: the radii of the ellipse
