@@ -14,13 +14,16 @@ FetchContent_Declare(
     SOURCE_DIR ${matrixName}
 )
 
-FetchContent_Declare(
-    code-coverage
-    URL https://raw.githubusercontent.com/StableCoder/cmake-scripts/23.04/code-coverage.cmake
-    SOURCE_DIR cmake
-    DOWNLOAD_NO_EXTRACT TRUE
-)
-
 FetchContent_MakeAvailable_With_Check(${matrixName})
 
-FetchContent_MakeAvailable_With_Check(code-coverage)
+if (TOP_LEVEL)
+    FetchContent_Declare(
+        code-coverage
+        URL https://raw.githubusercontent.com/StableCoder/cmake-scripts/23.04/code-coverage.cmake
+        SOURCE_DIR cmake
+        DOWNLOAD_NO_EXTRACT TRUE
+    )
+    FetchContent_MakeAvailable_With_Check(code-coverage)
+endif()
+
+
