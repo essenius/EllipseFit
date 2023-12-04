@@ -1,6 +1,6 @@
 include(tools)
 
-assertVariableSet(fitName matrixName Git_FOUND)
+assertVariableSet(fitName matrixName GIT_FOUND)
 
 # we need the source and binaries locations of the Matrix library that was already built in lib
 

@@ -3,7 +3,7 @@ include(tools)
 include(FindGit)
 find_package(Git)
 
-assertVariableSet(testFitName matrixLibName Git_FOUND)
+assertVariableSet(testFitName matrixLibName GIT_FOUND)
 
 include(FetchContent)
 
