@@ -6,6 +6,8 @@ find_package(Git)
 assertVariableSet(fitName matrixName Git_FOUND)
 
 # we need the source and binaries locations of the Matrix library that was already built in lib
+
+include (FetchContent)
 FetchContent_MakeAvailable(${matrixName})
 
 add_library(${fitName} "")
