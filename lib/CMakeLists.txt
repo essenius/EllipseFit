@@ -10,7 +10,7 @@ foreach (_variableName ${_variableNames})
     message(STATUS "${_variableName}=${${_variableName}}")
 endforeach()
 
-assertVariableSet(matrixName Git_FOUND)
+assertVariableSet(matrixName GIT_FOUND)
 
 include (FetchContent)
 
