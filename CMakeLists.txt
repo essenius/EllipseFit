@@ -7,7 +7,7 @@ set(matrixLibName Matrix) # the name of the library as defined in the CMakeLists
 
 project(${fitName} VERSION 0.0.1 LANGUAGES CXX)
 
-if (CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
+if ((CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR) AND NOT (Win32))
   set(TOP_LEVEL ON)
 else()
   set(TOP_LEVEL OFF)
