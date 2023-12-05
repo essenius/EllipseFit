@@ -3,12 +3,6 @@ include(tools)
 include(FindGit)
 find_package(Git)
 
-# show all variables. 
-get_cmake_property(_variableNames VARIABLES)
-list (SORT _variableNames)
-foreach (_variableName ${_variableNames})
-    message(STATUS "${_variableName}=${${_variableName}}")
-endforeach()
 
 assertVariableSet(matrixName GIT_FOUND)
 
@@ -22,6 +16,16 @@ FetchContent_Declare(
 )
 
 FetchContent_MakeAvailable_With_Check(${matrixName})
+
+# show all variables. 
+file(APPEND ${PROJECT_BINARY_DIR}/output.txt , "----- in lib")
+get_cmake_property(_variableNames VARIABLES)
+list (SORT _variableNames)
+foreach (_variableName ${_variableNames})
+file(APPEND ${PROJECT_BINARY_DIR}/output.txt , "${_variableName}=${${_variableName}}")
+endforeach()
+file(APPEND ${PROJECT_BINARY_DIR}/output.txt , "----- end lib")
+
 
 if (TOP_LEVEL)
     FetchContent_Declare(
