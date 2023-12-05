@@ -20,3 +20,6 @@ target_include_directories(${fitName} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${${mat
 #foreach (_variableName ${_variableNames})
 #    message(STATUS "${_variableName}=${${_variableName}}")
 #endforeach()
+
+install(TARGETS ${fitName} DESTINATION lib) # ${CMAKE_CURRENT_BINARY_DIR})
+install(FILES ${myHeaders} DESTINATION include) 

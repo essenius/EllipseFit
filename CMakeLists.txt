@@ -38,5 +38,5 @@ if(TOP_LEVEL)
   target_code_coverage(${testFitName} EXCLUDE build/_deps/googletest-src/* test/*) 
 endif()
 
-install(TARGETS ${fitName} LIBRARY DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+#install(TARGETS ${fitName} LIBRARY DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 # to generate coverage report run 'make ccov-EllipseFitTest' and view build/ccov/EllipseFitTest/index.html
