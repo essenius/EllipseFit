@@ -19,6 +19,15 @@ file(APPEND ${PROJECT_BINARY_DIR}/output.txt "executing FetchContent_MakeAvailab
 
 FetchContent_MakeAvailable_With_Check(${matrixName})
 
+file(GLOB sources_list LIST_DIRECTORIES true *)
+foreach(dir ${sources_list})
+    IF(IS_DIRECTORY ${dir})
+    file(APPEND ${PROJECT_BINARY_DIR}/output.txt "dir=${dir}\n")
+    ELSE()
+    file(APPEND ${PROJECT_BINARY_DIR}/output.txt "file=${dir}\n")
+    ENDIF()
+endforeach()
+
 # show all variables. 
 file(APPEND ${PROJECT_BINARY_DIR}/output.txt "----- in lib\n")
 get_cmake_property(_variableNames VARIABLES)
