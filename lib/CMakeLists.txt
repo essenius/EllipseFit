@@ -15,16 +15,18 @@ FetchContent_Declare(
     # SOURCE_DIR ${matrixName}
 )
 
+file(APPEND ${PROJECT_BINARY_DIR}/output.txt "executing FetchContent_MakeAvailable\n")
+
 FetchContent_MakeAvailable_With_Check(${matrixName})
 
 # show all variables. 
-file(APPEND ${PROJECT_BINARY_DIR}/output.txt , "----- in lib\n")
+file(APPEND ${PROJECT_BINARY_DIR}/output.txt "----- in lib\n")
 get_cmake_property(_variableNames VARIABLES)
 list (SORT _variableNames)
 foreach (_variableName ${_variableNames})
-   file(APPEND ${PROJECT_BINARY_DIR}/output.txt , "${_variableName}=${${_variableName}}\n")
+   file(APPEND ${PROJECT_BINARY_DIR}/output.txt "${_variableName}=${${_variableName}}\n")
 endforeach()
-file(APPEND ${PROJECT_BINARY_DIR}/output.txt , "----- end lib\n")
+file(APPEND ${PROJECT_BINARY_DIR}/output.txt "----- end lib\n")
 
 
 if (TOP_LEVEL)
