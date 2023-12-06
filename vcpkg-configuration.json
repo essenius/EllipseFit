@@ -12,9 +12,9 @@
     },
     {
       "kind": "git",
-      "baseline": "93644e6bd50f42be1eebf4e9400bae29abba7e72",
+      "baseline": "38026990f70cb5df8e898adbe1e2ca0ce444d508",
       "repository": "https://github.com/essenius/vcpkg",
-      "packages": [ "rix-matrix" ]
+      "packages": [ "safe-cstring", "rix-matrix", "ellipse-fit" ]
     }
   ]
 }
