@@ -21,6 +21,13 @@ file(APPEND ${PROJECT_BINARY_DIR}/output.txt "${matrixName}_BINARY_DIR= ${${matr
 
 add_library(${fitName} "")
 
+foreach (entry ${CMAKE_PREFIX_PATH})
+    list(APPEND includeFolders ${entry}/include)
+endforeach() 
+
+set(myHeaders Angle.h CartesianEllipse.h Coordinate.h EllipseFit.h MathUtils.h QuadraticEllipse.h)
+set(mySources Angle.cpp CartesianEllipse.cpp Coordinate.cpp EllipseFit.cpp MathUtils.cpp QuadraticEllipse.cpp) 
+
 # show all variables. 
 file(APPEND ${PROJECT_BINARY_DIR}/output.txt "Variables for EllipseFit:\n")
 get_cmake_property(_variableNames VARIABLES)
@@ -29,16 +36,13 @@ foreach (_variableName ${_variableNames})
     file(APPEND ${PROJECT_BINARY_DIR}/output.txt "${_variableName}=${${_variableName}}\n")
 endforeach()
 
-set(myHeaders Angle.h CartesianEllipse.h Coordinate.h EllipseFit.h MathUtils.h QuadraticEllipse.h)
-set(mySources Angle.cpp CartesianEllipse.cpp Coordinate.cpp EllipseFit.cpp MathUtils.cpp QuadraticEllipse.cpp) 
-
 file(APPEND ${PROJECT_BINARY_DIR}/output.txt "executing target_sources\n")
 target_sources (${fitName} PUBLIC ${myHeaders} PRIVATE ${mySources})
 
 file(APPEND ${PROJECT_BINARY_DIR}/output.txt "executing target_link_libraries\n")
 target_link_libraries(${fitName} PUBLIC Matrix)
 file(APPEND ${PROJECT_BINARY_DIR}/output.txt "executing target_include_libraries\n")
-target_include_directories(${fitName} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} C:/Users/Rik.Essenius/source/repos/essenius/temp/vcpkg_installed/x64-windows/include)
+target_include_directories(${fitName} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${includeFolders})
 
 file(APPEND ${PROJECT_BINARY_DIR}/output.txt "executing install TARGETS\n")
 install(TARGETS ${fitName} DESTINATION lib) # ${CMAKE_CURRENT_BINARY_DIR})
