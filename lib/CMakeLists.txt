@@ -12,7 +12,7 @@ FetchContent_Declare(
     ${matrixName}
     GIT_REPOSITORY https://github.com/essenius/matrix
     GIT_TAG main    
-    SOURCE_DIR ${matrixName}
+    # SOURCE_DIR ${matrixName}
 )
 
 FetchContent_MakeAvailable_With_Check(${matrixName})
