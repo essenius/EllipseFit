@@ -14,10 +14,10 @@ file(APPEND ${PROJECT_BINARY_DIR}/output.txt "${fitName}_SOURCE_DIR=   ${${fitNa
 file(APPEND ${PROJECT_BINARY_DIR}/output.txt "${fitName}_BINARY_DIR=   ${${fitName}_BINARY_DIR}\n")
 # we need the source and binaries locations of the Matrix library that was already built in lib
 
-FetchContent_MakeAvailable_With_Check(${matrixName})
+#FetchContent_MakeAvailable_With_Check(${matrixName})
 
-file(APPEND ${PROJECT_BINARY_DIR}/output.txt "${matrixName}_SOURCE_DIR= ${${matrixName}_SOURCE_DIR}\n")
-file(APPEND ${PROJECT_BINARY_DIR}/output.txt "${matrixName}_BINARY_DIR= ${${matrixName}_BINARY_DIR}\n")
+#file(APPEND ${PROJECT_BINARY_DIR}/output.txt "${matrixName}_SOURCE_DIR= ${${matrixName}_SOURCE_DIR}\n")
+#file(APPEND ${PROJECT_BINARY_DIR}/output.txt "${matrixName}_BINARY_DIR= ${${matrixName}_BINARY_DIR}\n")
 
 add_library(${fitName} "")
 
