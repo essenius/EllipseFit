@@ -16,9 +16,13 @@
 #include "CartesianEllipse.h"
 #include "Fit.h"
 
-using namespace EllipseFit;
 
 namespace EllipseFitTest {
+	using EllipseFit::QuadraticEllipse;
+	using EllipseFit::CartesianEllipse;
+	using EllipseFit::Coordinate;
+	using EllipseFit::Angle;
+	using EllipseFit::Fit;
 
 	class FitTest : public ::testing::Test {
 	protected:

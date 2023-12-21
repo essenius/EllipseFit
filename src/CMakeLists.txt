@@ -25,8 +25,8 @@ foreach (entry ${CMAKE_PREFIX_PATH})
     list(APPEND includeFolders ${entry}/include)
 endforeach() 
 
-set(myHeaders Angle.h CartesianEllipse.h Coordinate.h EllipseFit.h MathUtils.h QuadraticEllipse.h)
-set(mySources Angle.cpp CartesianEllipse.cpp Coordinate.cpp EllipseFit.cpp MathUtils.cpp QuadraticEllipse.cpp) 
+set(myHeaders Angle.h CartesianEllipse.h Coordinate.h Fit.h MathUtils.h QuadraticEllipse.h)
+set(mySources Angle.cpp CartesianEllipse.cpp Coordinate.cpp Fit.cpp MathUtils.cpp QuadraticEllipse.cpp) 
 
 # show all variables. 
 file(APPEND ${PROJECT_BINARY_DIR}/output.txt "Variables for EllipseFit:\n")

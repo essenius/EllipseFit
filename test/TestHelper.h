@@ -16,9 +16,11 @@
 #include "MathUtils.h"
 #include "Coordinate.h"
 
-using namespace EllipseFit;
-
 namespace EllipseFitTest {
+	using EllipseFit::Coordinate;
+	using EllipseFit::Angle;
+	using EllipseFit::Epsilon;
+
 	void assertDoubleEqual(const double& a, const double& b, const std::string& label, const double& epsilon = Epsilon);
 	void assertCoordinatesEqual(const Coordinate& a, const Coordinate& b, const std::string& label, const double& epsilon = Epsilon);
 	void assertAnglesEqual(const Angle& a, const Angle& b, const std::string& label, const double& epsilon = Epsilon);
