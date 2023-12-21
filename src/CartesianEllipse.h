@@ -37,6 +37,21 @@ public:
 	double getCircumference() const;
 
 	/**
+	 * \returns the center of the ellipse
+	 */	
+	Coordinate getCenter() const { return _center; }
+	
+	/**
+	 * \returns the radius of the ellipse
+	 */
+	Coordinate getRadius() const { return _radius; }
+	
+	/**
+	 * \returns the angle of the ellipse
+	 */
+	Angle getAngle() const { return _angle; }
+
+	/**
 	* \returns the distance between the ellipse and a point
 	*/
 	double getDistanceFrom(const Coordinate& referencePoint) const;
