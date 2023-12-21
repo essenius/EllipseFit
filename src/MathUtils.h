@@ -11,8 +11,8 @@
 
 // Utilities for variables of type double that we need at multiple places
 
-#ifndef DOUBLE_UTILS_H
-#define DOUBLE_UTILS_H
+#ifndef MATH_UTILS_H
+#define MATH_UTILS_H
 
 #ifdef _WIN32
 // ReSharper disable once CppUnusedIncludeDirective - on purpose, to get M_PI defined.
@@ -20,25 +20,28 @@
 #include <corecrt_math_defines.h>
 #endif
 
-constexpr double Epsilon = 1e-4;
+namespace EllipseFit {
 
-/**
- * \returns whether two doubles are about equal (up to a given epsilon)
- */
-bool isAboutEqual(const double& a, const double& b, const double& epsilon = Epsilon);
+	constexpr double Epsilon = 1e-4;
 
-/**
- * \returns the square of a double
- */
-double sqr(const double& a);
+	/**
+	 * \returns whether two doubles are about equal (up to a given epsilon)
+	 */
+	bool isAboutEqual(const double& a, const double& b, const double& epsilon = Epsilon);
 
-/**
- * \returns	a modulo b, but with a positive result (unlike the % operator)
- */
-int modulo(int a, int b);
+	/**
+	 * \returns the square of a double
+	 */
+	double sqr(const double& a);
 
-/**
- * \returns the sign of a number (-1, 0, or 1)
- */
-double sign(const double& a);
+	/**
+	 * \returns	a modulo b, but with a positive result (unlike the % operator)
+	 */
+	int modulo(int a, int b);
+
+	/**
+	 * \returns the sign of a number (-1, 0, or 1)
+	 */
+	double sign(const double& a);
+}
 #endif

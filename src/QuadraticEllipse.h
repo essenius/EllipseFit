@@ -18,42 +18,45 @@
 
 #include "Coordinate.h"
 
-class QuadraticEllipse {
-public:
-	/**
-	 * \brief Construct a QuadraticEllipse from the coefficients of the equation ax^2 + bxy + cy^2 + dx + fy + g = 0.
-     */
-	QuadraticEllipse(const double& a1, const double& b1, const double& c1, const double& d1, const double& f1, const double& g1);
+namespace EllipseFit {
 
-    QuadraticEllipse() = default;
+	class QuadraticEllipse {
+	public:
+		/**
+		 * \brief Construct a QuadraticEllipse from the coefficients of the equation ax^2 + bxy + cy^2 + dx + fy + g = 0.
+		 */
+		QuadraticEllipse(const double& a1, const double& b1, const double& c1, const double& d1, const double& f1, const double& g1);
 
-	/**
-	 * \returns the angle of the main radius of the ellipse 
-	 */
-    Angle getAngle() const;
+		QuadraticEllipse() = default;
 
-	/**
-	 * \returns the center of the ellipse
-	 */
-	Coordinate getCenter() const;
+		/**
+		 * \returns the angle of the main radius of the ellipse
+		 */
+		Angle getAngle() const;
 
-	/**
-	 * \returns the radius of the ellipse
-	 */
-	Coordinate getRadius() const;
+		/**
+		 * \returns the center of the ellipse
+		 */
+		Coordinate getCenter() const;
 
-	/**
-	 * \returns whether the ellipse is valid
-	 */
-	bool isValid() const;
+		/**
+		 * \returns the radius of the ellipse
+		 */
+		Coordinate getRadius() const;
 
-private:
-	double a{};
-	double b{};
-	double c{};
-	double d{};
-	double f{};
-	double g{};
-	double _discriminant;
-};
+		/**
+		 * \returns whether the ellipse is valid
+		 */
+		bool isValid() const;
+
+	private:
+		double a{};
+		double b{};
+		double c{};
+		double d{};
+		double f{};
+		double g{};
+		double _discriminant;
+	};
+}
 #endif

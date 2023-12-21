@@ -14,22 +14,27 @@
 
 #include "MathUtils.h"
 
-void assertDoubleEqual(const double& a, const double& b, const std::string& label, const double& epsilon) {
-	ASSERT_TRUE(isAboutEqual(a, b, epsilon)) << label << ": " << a << "!=" << b;
-}
+using namespace EllipseFit;
 
-void assertCoordinatesEqual(const Coordinate& a, const Coordinate& b, const std::string& label, const double& epsilon) {
-	assertDoubleEqual(a.x, b.x, label + std::string("(X)"), epsilon);
-	assertDoubleEqual(a.y, b.y, label + std::string("(Y)"), epsilon);
-}
+namespace EllipseFitTest {
 
-void assertAnglesEqual(const Angle& a, const Angle& b, const std::string& label, const double& epsilon) {
-	// avoid the asymptotes for tan
-	if (isAboutEqual(b.value, M_PI/2, epsilon) || isAboutEqual(b.value, -M_PI / 2, epsilon)) {
-		assertDoubleEqual(a.value, b.value, label + "(asymptote)", epsilon);
+	void assertDoubleEqual(const double& a, const double& b, const std::string& label, const double& epsilon) {
+		ASSERT_TRUE(isAboutEqual(a, b, epsilon)) << label << ": " << a << "!=" << b;
 	}
-	else {
-		// cater for differences of M_PI in the result which is OK for the tilt angle of an ellipse
-		assertDoubleEqual(tan(a.value), tan(b.value), label + "(tan)", epsilon);
+
+	void assertCoordinatesEqual(const Coordinate& a, const Coordinate& b, const std::string& label, const double& epsilon) {
+		assertDoubleEqual(a.x, b.x, label + std::string("(X)"), epsilon);
+		assertDoubleEqual(a.y, b.y, label + std::string("(Y)"), epsilon);
+	}
+
+	void assertAnglesEqual(const Angle& a, const Angle& b, const std::string& label, const double& epsilon) {
+		// avoid the asymptotes for tan
+		if (isAboutEqual(b.value, M_PI / 2, epsilon) || isAboutEqual(b.value, -M_PI / 2, epsilon)) {
+			assertDoubleEqual(a.value, b.value, label + "(asymptote)", epsilon);
+		}
+		else {
+			// cater for differences of M_PI in the result which is OK for the tilt angle of an ellipse
+			assertDoubleEqual(tan(a.value), tan(b.value), label + "(tan)", epsilon);
+		}
 	}
 }

@@ -14,47 +14,50 @@
 #include "CartesianEllipse.h"
 #include "MathUtils.h"
 
-CartesianEllipse::CartesianEllipse(const Coordinate& center, const Coordinate& radius, const Angle& angle): 
-	_center(center), _radius(radius), _angle(angle), _hasData(true) {}
+namespace EllipseFit {
 
-CartesianEllipse::CartesianEllipse(const QuadraticEllipse& quadraticEllipse): _coefficient(quadraticEllipse), _hasData(true) {
-	_center = _coefficient.getCenter();
-	_radius = _coefficient.getRadius();
-	_angle = _coefficient.getAngle();
-}
+	CartesianEllipse::CartesianEllipse(const Coordinate& center, const Coordinate& radius, const Angle& angle) :
+		_center(center), _radius(radius), _angle(angle), _hasData(true) {}
 
-double CartesianEllipse::getCircumference() const {
+	CartesianEllipse::CartesianEllipse(const QuadraticEllipse& quadraticEllipse) : _coefficient(quadraticEllipse), _hasData(true) {
+		_center = _coefficient.getCenter();
+		_radius = _coefficient.getRadius();
+		_angle = _coefficient.getAngle();
+	}
 
-	// approximation, not so easy to determine precisely.
-	// See https://www.johndcook.com/blog/2013/05/05/ramanujan-circumference-ellipse/
-    const auto t = 3 * sqr((_radius.x - _radius.y) / (_radius.x + _radius.y));
-	return M_PI * (_radius.x + _radius.y) * (1 + t / (10 + sqrt(4 - t)));
-}
+	double CartesianEllipse::getCircumference() const {
 
-double CartesianEllipse::getDistanceFrom(const Coordinate& referencePoint) const {
-	return getPointOnEllipseClosestTo(referencePoint).getDistanceFrom(referencePoint);
-}
+		// approximation, not so easy to determine precisely.
+		// See https://www.johndcook.com/blog/2013/05/05/ramanujan-circumference-ellipse/
+		const auto t = 3 * sqr((_radius.x - _radius.y) / (_radius.x + _radius.y));
+		return M_PI * (_radius.x + _radius.y) * (1 + t / (10 + sqrt(4 - t)));
+	}
 
-Coordinate CartesianEllipse::getPointOnEllipseAtAngle(const Angle& referenceAngle) const {
-	// Note the angle is relative to the center of the ellipse, not the origin 
-	return Coordinate{
-		_center.x + _radius.x * cos(referenceAngle.value) * cos(_angle.value) -
-		_radius.y * sin(referenceAngle.value) * sin(_angle.value),
-		_center.y + _radius.y * sin(referenceAngle.value) * cos(_angle.value) +
-		_radius.x * cos(referenceAngle.value) * sin(_angle.value)
-	};
-}
+	double CartesianEllipse::getDistanceFrom(const Coordinate& referencePoint) const {
+		return getPointOnEllipseClosestTo(referencePoint).getDistanceFrom(referencePoint);
+	}
 
-Coordinate CartesianEllipse::getPointOnEllipseClosestTo(const Coordinate& referencePoint) const {
-	// Normalize the point, then find the angle with the origin. This gives the angle that parametricRepresentation needs.
-	const auto transformedCoordinate = referencePoint
-		.translated(-_center)
-		.rotated(-_angle.value)
-		.scaled(_radius.getReciprocal());
-	const auto angleWithOrigin = transformedCoordinate.getAngle();
-	return getPointOnEllipseAtAngle(angleWithOrigin);
-}
+	Coordinate CartesianEllipse::getPointOnEllipseAtAngle(const Angle& referenceAngle) const {
+		// Note the angle is relative to the center of the ellipse, not the origin 
+		return Coordinate{
+			_center.x + _radius.x * cos(referenceAngle.value) * cos(_angle.value) -
+			_radius.y * sin(referenceAngle.value) * sin(_angle.value),
+			_center.y + _radius.y * sin(referenceAngle.value) * cos(_angle.value) +
+			_radius.x * cos(referenceAngle.value) * sin(_angle.value)
+		};
+	}
 
-bool CartesianEllipse::isValid() const {
-	return _radius.x > 0 && _radius.y > 0;
+	Coordinate CartesianEllipse::getPointOnEllipseClosestTo(const Coordinate& referencePoint) const {
+		// Normalize the point, then find the angle with the origin. This gives the angle that parametricRepresentation needs.
+		const auto transformedCoordinate = referencePoint
+			.translated(-_center)
+			.rotated(-_angle.value)
+			.scaled(_radius.getReciprocal());
+		const auto angleWithOrigin = transformedCoordinate.getAngle();
+		return getPointOnEllipseAtAngle(angleWithOrigin);
+	}
+
+	bool CartesianEllipse::isValid() const {
+		return _radius.x > 0 && _radius.y > 0;
+	}
 }

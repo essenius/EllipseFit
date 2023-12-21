@@ -14,37 +14,40 @@
 #include "Angle.h"
 #include "MathUtils.h"
 
-Angle Angle::operator-(const Angle &other) const {
-    return { operator-(other.value) };
-}
+namespace EllipseFit {
 
-double Angle::operator- (const double& other) const {
-	const auto returnValue = value - other;
-	return normalized(returnValue);
-}
+	Angle Angle::operator-(const Angle& other) const {
+		return { operator-(other.value) };
+	}
 
-double Angle::cos() const {
-	return std::cos(value);
-}
+	double Angle::operator- (const double& other) const {
+		const auto returnValue = value - other;
+		return normalized(returnValue);
+	}
 
-int16_t Angle::degreesTimes10() const {
-	return static_cast <int16_t>(value * 1800.0 / M_PI);
-}
+	double Angle::cos() const {
+		return std::cos(value);
+	}
 
-unsigned int Angle::getQuadrant() const {
-	if (value < -M_PI / 2.0) return 3;
-	if (value < 0.0) return 4;
-	if (value < M_PI / 2.0) return 1;
-	return 2;
-}
+	int16_t Angle::degreesTimes10() const {
+		return static_cast <int16_t>(value * 1800.0 / M_PI);
+	}
 
-double Angle::normalized(const double& value) {
-	const auto bound = abs(value) / M_PI;
-	if (abs(bound) <= 1) return value;
-	const auto factor = std::trunc(0.5 * (bound + 1)) * -sign(value);
-	return value + factor * 2 * M_PI;
-}
+	unsigned int Angle::getQuadrant() const {
+		if (value < -M_PI / 2.0) return 3;
+		if (value < 0.0) return 4;
+		if (value < M_PI / 2.0) return 1;
+		return 2;
+	}
 
-double Angle::sin() const {
-	return std::sin(value);
+	double Angle::normalized(const double& value) {
+		const auto bound = abs(value) / M_PI;
+		if (abs(bound) <= 1) return value;
+		const auto factor = std::trunc(0.5 * (bound + 1)) * -sign(value);
+		return value + factor * 2 * M_PI;
+	}
+
+	double Angle::sin() const {
+		return std::sin(value);
+	}
 }

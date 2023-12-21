@@ -15,52 +15,55 @@
 #define COORDINATE_H
 #include "Angle.h"
 
-struct Coordinate {
-	double x;
-	double y;
+namespace EllipseFit {
 
-	Coordinate operator-() const;
+	struct Coordinate {
+		double x;
+		double y;
 
-	bool operator==(const Coordinate& other) const;
+		Coordinate operator-() const;
 
-	/**
-	 * \return the angle between the coordinate and the origin
-	 */
-	Angle getAngle() const;
+		bool operator==(const Coordinate& other) const;
 
-	/**
-	 * \return the angle between the coordinate and another coordinate
-	 */
-	Angle getAngleFrom(const Coordinate& other) const;
+		/**
+		 * \return the angle between the coordinate and the origin
+		 */
+		Angle getAngle() const;
 
-	/**
-	 * \return the distance between the coordinate and the origin
-	 */
-	double getDistance() const;
+		/**
+		 * \return the angle between the coordinate and another coordinate
+		 */
+		Angle getAngleFrom(const Coordinate& other) const;
 
-	/**
-	 * \return the distance between the coordinate and another coordinate
-	 */
-	double getDistanceFrom(const Coordinate& other) const;
+		/**
+		 * \return the distance between the coordinate and the origin
+		 */
+		double getDistance() const;
 
-	/**
-	 * \return the reciprocal of the coordinate (1/x, 1/y)
-	 */
-	Coordinate getReciprocal() const;
+		/**
+		 * \return the distance between the coordinate and another coordinate
+		 */
+		double getDistanceFrom(const Coordinate& other) const;
 
-	/**
-	 * \return the coordinate rotated over an angle
-	 */
-	Coordinate rotated(double angle) const;
+		/**
+		 * \return the reciprocal of the coordinate (1/x, 1/y)
+		 */
+		Coordinate getReciprocal() const;
 
-	/**
-	 * \return the coordinate scaled with another coordinate
-	 */
-	Coordinate scaled(const Coordinate& vector) const;
+		/**
+		 * \return the coordinate rotated over an angle
+		 */
+		Coordinate rotated(double angle) const;
 
-	/**
-	 * \return the coordinate translated with another coordinate
-	 */
-	Coordinate translated(const Coordinate& vector) const;
-};
+		/**
+		 * \return the coordinate scaled with another coordinate
+		 */
+		Coordinate scaled(const Coordinate& vector) const;
+
+		/**
+		 * \return the coordinate translated with another coordinate
+		 */
+		Coordinate translated(const Coordinate& vector) const;
+	};
+}
 #endif

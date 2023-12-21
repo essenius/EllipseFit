@@ -107,16 +107,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="CartesianEllipseDriver.h" />
-    <ClInclude Include="EllipseFitTest.h" />
+    <ClInclude Include="FitTest.h" />
     <ClInclude Include="TestHelper.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AngleTest.cpp" />
-    <ClCompile Include="CartesianEllipseDriver.cpp" />
     <ClCompile Include="CartesianEllipseTest.cpp" />
     <ClCompile Include="CoordinateTest.cpp" />
-    <ClCompile Include="EllipseFitTest.cpp" />
+    <ClCompile Include="FitTest.cpp" />
     <ClCompile Include="MathUtilsTest.cpp" />
     <ClCompile Include="QuadraticEllipseTest.cpp" />
     <ClCompile Include="TestHelper.cpp" />

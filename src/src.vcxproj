@@ -22,7 +22,7 @@
     <ClCompile Include="Angle.cpp" />
     <ClCompile Include="CartesianEllipse.cpp" />
     <ClCompile Include="Coordinate.cpp" />
-    <ClCompile Include="EllipseFit.cpp" />
+    <ClCompile Include="Fit.cpp" />
     <ClCompile Include="MathUtils.cpp" />
     <ClCompile Include="QuadraticEllipse.cpp" />
   </ItemGroup>
@@ -30,7 +30,7 @@
     <ClInclude Include="Angle.h" />
     <ClInclude Include="CartesianEllipse.h" />
     <ClInclude Include="Coordinate.h" />
-    <ClInclude Include="EllipseFit.h" />
+    <ClInclude Include="Fit.h" />
     <ClInclude Include="MathUtils.h" />
     <ClInclude Include="QuadraticEllipse.h" />
   </ItemGroup>

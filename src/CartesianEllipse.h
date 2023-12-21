@@ -24,60 +24,63 @@
 #include "QuadraticEllipse.h"
 #include "Coordinate.h"
 
-class CartesianEllipse {
-public:
+namespace EllipseFit {
 
-	CartesianEllipse() = default;
-	CartesianEllipse(const Coordinate& center, const Coordinate& radius, const Angle& angle);
-	explicit CartesianEllipse(const QuadraticEllipse& quadraticEllipse);
+	class CartesianEllipse {
+	public:
 
-	/** 
-	* \returns an approximation of the circumference of the ellipse
-	*/
-	double getCircumference() const;
+		CartesianEllipse() = default;
+		CartesianEllipse(const Coordinate& center, const Coordinate& radius, const Angle& angle);
+		explicit CartesianEllipse(const QuadraticEllipse& quadraticEllipse);
 
-	/**
-	 * \returns the center of the ellipse
-	 */	
-	Coordinate getCenter() const { return _center; }
-	
-	/**
-	 * \returns the radius of the ellipse
-	 */
-	Coordinate getRadius() const { return _radius; }
-	
-	/**
-	 * \returns the angle of the ellipse
-	 */
-	Angle getAngle() const { return _angle; }
+		/**
+		* \returns an approximation of the circumference of the ellipse
+		*/
+		double getCircumference() const;
 
-	/**
-	* \returns the distance between the ellipse and a point
-	*/
-	double getDistanceFrom(const Coordinate& referencePoint) const;
+		/**
+		 * \returns the center of the ellipse
+		 */
+		Coordinate getCenter() const { return _center; }
 
-	/**
-	* \returns the point on the ellipse for a given angle (relative to the center of the ellipse, not the origin)
-	*/
-	Coordinate getPointOnEllipseAtAngle(const Angle& referenceAngle) const;
+		/**
+		 * \returns the radius of the ellipse
+		 */
+		Coordinate getRadius() const { return _radius; }
 
-	/**
-	* \returns the point on the ellipse closest to a given point
-	*/
-	Coordinate getPointOnEllipseClosestTo(const Coordinate& referencePoint) const;
+		/**
+		 * \returns the angle of the ellipse
+		 */
+		Angle getAngle() const { return _angle; }
 
-	/**
-	* \returns whether the ellipse is valid
-	*/
-	bool isValid() const;
+		/**
+		* \returns the distance between the ellipse and a point
+		*/
+		double getDistanceFrom(const Coordinate& referencePoint) const;
 
-// compromise between encapsulation and testability: make the data members protected so we can expose them in a driver subclass
-protected:
-	QuadraticEllipse _coefficient{};
-	Coordinate _center{};
-	Coordinate _radius{};
-	Angle _angle{};
-	bool _hasData = false;
+		/**
+		* \returns the point on the ellipse for a given angle (relative to the center of the ellipse, not the origin)
+		*/
+		Coordinate getPointOnEllipseAtAngle(const Angle& referenceAngle) const;
 
-};
+		/**
+		* \returns the point on the ellipse closest to a given point
+		*/
+		Coordinate getPointOnEllipseClosestTo(const Coordinate& referencePoint) const;
+
+		/**
+		* \returns whether the ellipse is valid
+		*/
+		bool isValid() const;
+
+		// compromise between encapsulation and testability: make the data members protected so we can expose them in a driver subclass
+	protected:
+		QuadraticEllipse _coefficient{};
+		Coordinate _center{};
+		Coordinate _radius{};
+		Angle _angle{};
+		bool _hasData = false;
+
+	};
+}
 #endif

@@ -12,20 +12,23 @@
 #include <cmath>
 #include "MathUtils.h"
 
-bool isAboutEqual(const double& a, const double& b, const double& epsilon) {
-	return abs(a - b) <= epsilon;
-}
+namespace EllipseFit {
 
-double sqr(const double& a) {
-	return a * a;
-}
+	bool isAboutEqual(const double& a, const double& b, const double& epsilon) {
+		return abs(a - b) <= epsilon;
+	}
 
-int modulo(const int a, const int b) {
-    return (b + a % b) % b;
-}
+	double sqr(const double& a) {
+		return a * a;
+	}
 
-double sign(const double &a) {
-	if (a < 0) return -1;
-	if (a > 0) return 1;
-	return 0;
+	int modulo(const int a, const int b) {
+		return (b + a % b) % b;
+	}
+
+	double sign(const double& a) {
+		if (a < 0) return -1;
+		if (a > 0) return 1;
+		return 0;
+	}
 }

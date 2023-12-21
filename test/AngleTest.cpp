@@ -14,53 +14,59 @@
 #include "TestHelper.h"
 #include "Angle.h"
 
-TEST(AngleTest, QuadrantTest) {
-	constexpr double AngleEpsilon = 0.001;
-	auto angle = Angle{ AngleEpsilon };
-    EXPECT_EQ(1, angle.getQuadrant());
-	angle.value = M_PI / 2 - AngleEpsilon;
-	EXPECT_EQ(1, angle.getQuadrant());
+using namespace EllipseFit;
 
-	angle.value = M_PI - AngleEpsilon;
-	EXPECT_EQ(2, angle.getQuadrant());
-	angle.value = M_PI / 2 + AngleEpsilon;
-	EXPECT_EQ(2, angle.getQuadrant());
+namespace EllipseFitTest {
 
-	angle.value = -M_PI + AngleEpsilon;
-	EXPECT_EQ(3, angle.getQuadrant());
-	angle.value = -M_PI / 2 - AngleEpsilon;
-	EXPECT_EQ(3, angle.getQuadrant());
+	TEST(AngleTest, QuadrantTest) {
+		constexpr double AngleEpsilon = 0.001;
+		auto angle = Angle{ AngleEpsilon };
+	    EXPECT_EQ(1, angle.getQuadrant());
+		angle.value = M_PI / 2 - AngleEpsilon;
+		EXPECT_EQ(1, angle.getQuadrant());
 
-	angle.value = -AngleEpsilon;
-	EXPECT_EQ(4, angle.getQuadrant());
-	angle.value = -M_PI / 2 + AngleEpsilon;
-	EXPECT_EQ(4, angle.getQuadrant());
-}
+		angle.value = M_PI - AngleEpsilon;
+		EXPECT_EQ(2, angle.getQuadrant());
+		angle.value = M_PI / 2 + AngleEpsilon;
+		EXPECT_EQ(2, angle.getQuadrant());
 
-TEST(AngleTest, CompareTest) {
-	constexpr Angle A {M_PI};
-	constexpr Angle B {M_PI};
-	assertAnglesEqual(A, { M_PI }, "a = M_PI");
-	assertAnglesEqual(A, B, "a=b");
-	assertAnglesEqual({ M_PI }, { M_PI }, "M_PI = M_PI");
-}
+		angle.value = -M_PI + AngleEpsilon;
+		EXPECT_EQ(3, angle.getQuadrant());
+		angle.value = -M_PI / 2 - AngleEpsilon;
+		EXPECT_EQ(3, angle.getQuadrant());
 
-TEST(AngleTest, OperatorTest) {
-	constexpr Angle A {M_PI};
-	const auto b = A - 7 * M_PI / 3;
-	assertDoubleEqual(2 * M_PI / 3, b, "operator- on double");
-	const auto c = A - Angle{ M_PI / 3 };
-	assertAnglesEqual({ 2 * M_PI / 3 }, c, "operator- on angle");
-}
+		angle.value = -AngleEpsilon;
+		EXPECT_EQ(4, angle.getQuadrant());
+		angle.value = -M_PI / 2 + AngleEpsilon;
+		EXPECT_EQ(4, angle.getQuadrant());
+	}
 
-TEST(AngleTest, Times10Test) {
-	constexpr Angle A{ -M_PI };
-	EXPECT_EQ(-1800, A.degreesTimes10()) << "Angle to degrees times 10 is correct";
-}
+	TEST(AngleTest, CompareTest) {
+		constexpr Angle A {M_PI};
+		constexpr Angle B {M_PI};
+		assertAnglesEqual(A, { M_PI }, "a = M_PI");
+		assertAnglesEqual(A, B, "a=b");
+		assertAnglesEqual({ M_PI }, { M_PI }, "M_PI = M_PI");
+	}
 
-TEST(AngleTest, Normalize) {
-	assertDoubleEqual(M_PI, Angle::normalized(M_PI),  "Angle normalize PI is correct");
-	assertDoubleEqual(-M_PI, Angle::normalized(-M_PI),  "Angle normalize -PI is correct");
-	assertDoubleEqual(0.1 * M_PI, Angle::normalized(- 3.9 * M_PI), "Angle normalize -3.9 * PI is correct");
-	assertDoubleEqual(-0.9 * M_PI, Angle::normalized(13.1 * M_PI), "Angle normalize 13.1 * PI is correct");
+	TEST(AngleTest, OperatorTest) {
+		constexpr Angle A {M_PI};
+		const auto b = A - 7 * M_PI / 3;
+		assertDoubleEqual(2 * M_PI / 3, b, "operator- on double");
+		const auto c = A - Angle{ M_PI / 3 };
+		assertAnglesEqual({ 2 * M_PI / 3 }, c, "operator- on angle");
+	}
+
+	TEST(AngleTest, Times10Test) {
+		constexpr Angle A{ -M_PI };
+		EXPECT_EQ(-1800, A.degreesTimes10()) << "Angle to degrees times 10 is correct";
+	}
+
+	TEST(AngleTest, Normalize) {
+		assertDoubleEqual(M_PI, Angle::normalized(M_PI), "Angle normalize PI is correct");
+		assertDoubleEqual(-M_PI, Angle::normalized(-M_PI), "Angle normalize -PI is correct");
+		assertDoubleEqual(0.1 * M_PI, Angle::normalized(-3.9 * M_PI), "Angle normalize -3.9 * PI is correct");
+		assertDoubleEqual(-0.9 * M_PI, Angle::normalized(13.1 * M_PI), "Angle normalize 13.1 * PI is correct");
+
+	}
 }
