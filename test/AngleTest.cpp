@@ -14,7 +14,7 @@
 #include "TestHelper.h"
 #include "Angle.h"
 
-using namespace EllipseFit;
+using namespace EllipseMath;
 
 namespace EllipseFitTest {
 

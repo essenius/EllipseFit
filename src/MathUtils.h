@@ -20,7 +20,7 @@
 #include <corecrt_math_defines.h>
 #endif
 
-namespace EllipseFit {
+namespace EllipseMath {
 
 	constexpr double Epsilon = 1e-4;
 

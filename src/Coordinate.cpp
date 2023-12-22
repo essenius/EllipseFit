@@ -15,7 +15,7 @@
 #include "Coordinate.h"
 #include "MathUtils.h"
 
-namespace EllipseFit {
+namespace EllipseMath {
 
     bool Coordinate::operator==(const Coordinate& other) const {
         return isAboutEqual(x, other.x) && isAboutEqual(y, other.y);

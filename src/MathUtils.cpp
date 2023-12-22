@@ -12,7 +12,7 @@
 #include <cmath>
 #include "MathUtils.h"
 
-namespace EllipseFit {
+namespace EllipseMath {
 
 	bool isAboutEqual(const double& a, const double& b, const double& epsilon) {
 		return abs(a - b) <= epsilon;

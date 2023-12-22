@@ -9,26 +9,26 @@
 // is distributed on an "AS IS" BASIS WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and limitations under the License.
 
-#include "Fit.h"
+#include "EllipseFit.h"
 #include "QuadraticEllipse.h"
 #include <iostream>
 
-namespace EllipseFit {
+namespace EllipseMath {
 
 	// see https://autotrace.sourceforge.net/WSCG98.pdf for an explanation of the algorithm
 	// optimized version of https://github.com/mericdurukan/ellipse-fitting
 
 	// fixed buffer size as we don't want to fragment the heap
-	constexpr unsigned int Fit::BufferSize;  // NOLINT(readability-redundant-declaration) -- using C++ 11 on device
+	constexpr unsigned int EllipseFit::BufferSize;  // NOLINT(readability-redundant-declaration) -- using C++ 11 on device
 
-	Fit::Fit() {
+	EllipseFit::EllipseFit() {
 		// Calculating the constant vectors/matrices once to save a bit of time when fitting
 		const Matrix c1({ {0, 0, 2},{ 0, -1, 0},{ 2, 0, 0} });
 		_c1Inverse = c1.inverted();
 		_design2.setColumn(2, 1); // set the last column to all ones
 	}
 
-	bool Fit::addMeasurement(const double x, const double y) {
+	bool EllipseFit::addMeasurement(const double x, const double y) {
 		if (_size >= BufferSize) return false;
 		// Design matrix (D in the article). Building up incrementally to minimize compute at fit
 		_design1(_size, 0) = x * x;
@@ -40,15 +40,15 @@ namespace EllipseFit {
 		return true;
 	}
 
-	bool Fit::addMeasurement(const Coordinate& point) {
+	bool EllipseFit::addMeasurement(const Coordinate& point) {
 		return addMeasurement(point.x, point.y);
 	}
 
-	void Fit::begin() {
+	void EllipseFit::begin() {
 		_size = 0;
 	}
 
-	QuadraticEllipse Fit::fit() const {
+	QuadraticEllipse EllipseFit::fit() const {
 
 		// Scatter matrix (S in the article)
 		const Matrix scatter1 = _design1.transposed() * _design1;

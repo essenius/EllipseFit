@@ -14,19 +14,19 @@
 
 #include "gtest/gtest.h"
 #include "CartesianEllipse.h"
-#include "Fit.h"
+#include "EllipseFit.h"
 
 
 namespace EllipseFitTest {
-	using EllipseFit::QuadraticEllipse;
-	using EllipseFit::CartesianEllipse;
-	using EllipseFit::Coordinate;
-	using EllipseFit::Angle;
-	using EllipseFit::Fit;
+	using EllipseMath::QuadraticEllipse;
+	using EllipseMath::CartesianEllipse;
+	using EllipseMath::Coordinate;
+	using EllipseMath::Angle;
+	using EllipseMath::EllipseFit;
 
-	class FitTest : public ::testing::Test {
+	class EllipseFitTest : public ::testing::Test {
 	protected:
-		static QuadraticEllipse fitPerfectEllipse(Fit& ellipseFit, const CartesianEllipse& inputEllipse);
+		static QuadraticEllipse fitPerfectEllipse(EllipseFit& ellipseFit, const CartesianEllipse& inputEllipse);
 		static void assertPerfectEllipse(const Coordinate& center, const Coordinate& radius, const Angle& angle);
 		static void assertEllipseWithDistance(const Coordinate& center, const Coordinate& radius, const Angle& angle, const double& distance);
 		static void assertPartialEllipse(const CartesianEllipse& ellipse, const double& fraction, const double& startAngle);

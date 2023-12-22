@@ -16,7 +16,7 @@
 
 // interesting: https://cookierobotics.com/007/
 
-using namespace EllipseFit;
+using namespace EllipseMath;
 
 namespace EllipseFitTest {
 

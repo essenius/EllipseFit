@@ -24,7 +24,7 @@
 #include "QuadraticEllipse.h"
 #include "Coordinate.h"
 
-namespace EllipseFit {
+namespace EllipseMath {
 
 	class CartesianEllipse {
 	public:

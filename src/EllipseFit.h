@@ -19,11 +19,11 @@
 #include "QuadraticEllipse.h"
 #include "SolverMatrix.h"
 
-namespace EllipseFit {
-	class Fit {
+namespace EllipseMath {
+	class EllipseFit {
 
 	public:
-		explicit Fit();
+		explicit EllipseFit();
 
 		/**
 		 * \brief Add a point to the buffer

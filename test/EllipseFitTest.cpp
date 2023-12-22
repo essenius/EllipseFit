@@ -10,14 +10,14 @@
 // See the License for the specific language governing permissions and limitations under the License.
 
 #include <gtest/gtest.h>
-#include "FitTest.h"
+#include "EllipseFitTest.h"
 #include "TestHelper.h"
 
-using namespace EllipseFit;
+using namespace EllipseMath;
 
 namespace EllipseFitTest {
-	QuadraticEllipse FitTest::fitPerfectEllipse(Fit& ellipseFit, const CartesianEllipse& inputEllipse) {
-		const unsigned int pointsOnEllipse = Fit::getSize();
+	QuadraticEllipse EllipseFitTest::fitPerfectEllipse(EllipseFit& ellipseFit, const CartesianEllipse& inputEllipse) {
+		const unsigned int pointsOnEllipse = EllipseFit::getSize();
 		ellipseFit.begin();
 		auto x = -M_PI;
 		EXPECT_FALSE(ellipseFit.bufferIsFull()) << "Buffer is not full";
@@ -32,9 +32,9 @@ namespace EllipseFitTest {
 		return ellipseFit.fit();
 	}
 
-	void FitTest::assertPerfectEllipse(const Coordinate& center, const Coordinate& radius, const Angle& angle) {
+	void EllipseFitTest::assertPerfectEllipse(const Coordinate& center, const Coordinate& radius, const Angle& angle) {
 		const auto inputEllipse = CartesianEllipse(center, radius, angle);
-		Fit ellipseFit;
+		EllipseFit ellipseFit;
 		const auto result = fitPerfectEllipse(ellipseFit, inputEllipse);
 		EXPECT_TRUE(result.isValid()) << "Result is valid";
 		const auto resultEllipse = CartesianEllipse(result);
@@ -44,22 +44,22 @@ namespace EllipseFitTest {
 
 		// check if all points of the parametric representation of the result ellipse are on the original ellipse
 		auto x = -M_PI;
-		for (int i = -16; i < static_cast<int>(Fit::getSize()); i++) {
+		for (int i = -16; i < static_cast<int>(EllipseFit::getSize()); i++) {
 			Coordinate pointOut = resultEllipse.getPointOnEllipseAtAngle(Angle{ x });
 			const auto distanceFromEllipse = inputEllipse.getDistanceFrom(pointOut);
 			assertDoubleEqual(0, distanceFromEllipse, "Distance", 0.0001);
-			x += M_PI / (Fit::getSize() / 2.0);
+			x += M_PI / (EllipseFit::getSize() / 2.0);
 		}
 	}
 
 	// create two ellipses at a distance from the expected result, and add points from each to the fitter.
 
-	void FitTest::assertEllipseWithDistance(const Coordinate& center, const Coordinate& radius, const Angle& angle, const double& distance) {
+	void EllipseFitTest::assertEllipseWithDistance(const Coordinate& center, const Coordinate& radius, const Angle& angle, const double& distance) {
 		auto distancec = Coordinate{ distance, distance };
 		const auto innerEllipse = CartesianEllipse(center, radius.translated(-distancec), angle);
 		const auto outerEllipse = CartesianEllipse(center, radius.translated(distancec), angle);
-		const unsigned int pointsOnEllipse = Fit::getSize();
-		Fit ellipseFit;
+		const unsigned int pointsOnEllipse = EllipseFit::getSize();
+		EllipseFit ellipseFit;
 		ellipseFit.begin();
 		auto x = -M_PI;
 		for (unsigned int i = 0; i < pointsOnEllipse; i++) {
@@ -91,10 +91,10 @@ namespace EllipseFitTest {
 		}
 	}
 
-	void FitTest::assertPartialEllipse(const CartesianEllipse& ellipse, const double& fraction, const double& startAngle) {
+	void EllipseFitTest::assertPartialEllipse(const CartesianEllipse& ellipse, const double& fraction, const double& startAngle) {
 
-		const unsigned int points = Fit::getSize();
-		Fit ellipseFit;
+		const unsigned int points = EllipseFit::getSize();
+		EllipseFit ellipseFit;
 		ellipseFit.begin();
 		const double delta = M_PI * 2.0 * fraction / points;
 		auto x = startAngle;
@@ -128,47 +128,47 @@ namespace EllipseFitTest {
 		}
 	}
 
-	TEST_F(FitTest, PerfectFitCircle) {
+	TEST_F(EllipseFitTest, PerfectFitCircle) {
 		// Circle with center = (100, -100), radius=(8,8), angle = irrelevant
 		assertPerfectEllipse({ 100, -100 }, { 8, 8 }, { 0 });
 	}
-	TEST_F(FitTest, PerfectFitRoundEllipse) {
+	TEST_F(EllipseFitTest, PerfectFitRoundEllipse) {
 		// ellipse with center = (1,3), radius = (12,10), angle = pi/4, i.e. quite round
 		assertPerfectEllipse({ 1, 3 }, { 12, 10 }, { M_PI / 4 });
 	}
 
-	TEST_F(FitTest, PerfectFitFlatEllipse) {
+	TEST_F(EllipseFitTest, PerfectFitFlatEllipse) {
 		// ellipse with center = (0,0), radius = (20,1), angle = pi/3, i.e. very flat ellipse
 		assertPerfectEllipse({ 0, 0 }, { 20, 1 }, { M_PI / 3 });
 	}
 
-	TEST_F(FitTest, PerfectFitEllipseCloseToMeasured) {
+	TEST_F(EllipseFitTest, PerfectFitEllipseCloseToMeasured) {
 		// ellipse with center = (-21.09,-45.71), radius = (12.68,9.88), angle = -0.48; close to one measured
 		assertPerfectEllipse({ -21.09, -45.71 }, { 12.68, 9.88 }, { -0.48 });
 	}
 
-	TEST_F(FitTest, PerfectLineShouldNotFit) {
+	TEST_F(EllipseFitTest, PerfectLineShouldNotFit) {
 		const auto inputEllipse = CartesianEllipse({ 0,0 }, { 10,0 }, { M_PI / 3 });
-		Fit ellipseFit;
+		EllipseFit ellipseFit;
 		const auto result = fitPerfectEllipse(ellipseFit, inputEllipse);
 		EXPECT_FALSE(result.isValid()) << "Samples forming a line should not return a match";
 	}
 
-	TEST_F(FitTest, FitWithDistance1) {
+	TEST_F(EllipseFitTest, FitWithDistance1) {
 		assertEllipseWithDistance({ 0,0 }, { 10, 5 }, { -M_PI / 6 }, 0.1);
 	}
 
-	TEST_F(FitTest, FitWithDistance2) {
+	TEST_F(EllipseFitTest, FitWithDistance2) {
 		assertEllipseWithDistance({ -30, -20 }, { 12, 9 }, { M_PI / 5 }, 0.1);
 	}
 
-	TEST_F(FitTest, PartialEllipseTest) {
+	TEST_F(EllipseFitTest, PartialEllipseTest) {
 		// take 30% of an ellipse, starting at M_PI/2
 		assertPartialEllipse(CartesianEllipse({ 20,-20 }, { 10, 4 }, { M_PI / 5 }), 0.3, M_PI / 2);
 	}
 
-	TEST_F(FitTest, AllZeroSamples) {
-		Fit ellipseFit;
+	TEST_F(EllipseFitTest, AllZeroSamples) {
+		EllipseFit ellipseFit;
 		ellipseFit.begin();
 		ASSERT_EQ(32, ellipseFit.getSize()) << "Size OK";
 		for (unsigned int i = 0; i < 32; i++) {

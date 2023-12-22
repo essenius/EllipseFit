@@ -17,9 +17,9 @@
 #include "Coordinate.h"
 
 namespace EllipseFitTest {
-	using EllipseFit::Coordinate;
-	using EllipseFit::Angle;
-	using EllipseFit::Epsilon;
+	using EllipseMath::Coordinate;
+	using EllipseMath::Angle;
+	using EllipseMath::Epsilon;
 
 	void assertDoubleEqual(const double& a, const double& b, const std::string& label, const double& epsilon = Epsilon);
 	void assertCoordinatesEqual(const Coordinate& a, const Coordinate& b, const std::string& label, const double& epsilon = Epsilon);

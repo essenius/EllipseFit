@@ -24,7 +24,7 @@
     <ClCompile Include="Coordinate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Fit.cpp">
+    <ClCompile Include="EllipseFit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MathUtils.cpp">
@@ -44,7 +44,7 @@
     <ClInclude Include="Coordinate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Fit.h">
+    <ClInclude Include="EllipseFit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MathUtils.h">

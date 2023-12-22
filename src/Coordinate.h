@@ -15,7 +15,7 @@
 #define COORDINATE_H
 #include "Angle.h"
 
-namespace EllipseFit {
+namespace EllipseMath {
 
 	struct Coordinate {
 		double x;

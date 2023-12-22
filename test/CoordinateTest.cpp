@@ -14,7 +14,7 @@
 #include "Coordinate.h"
 #include "MathUtils.h"
 
-using namespace EllipseFit;
+using namespace EllipseMath;
 
 namespace EllipseFitTest {
 

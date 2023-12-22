@@ -14,7 +14,7 @@
 #include "CartesianEllipse.h"
 #include "MathUtils.h"
 
-namespace EllipseFit {
+namespace EllipseMath {
 
 	CartesianEllipse::CartesianEllipse(const Coordinate& center, const Coordinate& radius, const Angle& angle) :
 		_center(center), _radius(radius), _angle(angle), _hasData(true) {}

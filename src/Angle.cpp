@@ -14,7 +14,7 @@
 #include "Angle.h"
 #include "MathUtils.h"
 
-namespace EllipseFit {
+namespace EllipseMath {
 
 	Angle Angle::operator-(const Angle& other) const {
 		return { operator-(other.value) };

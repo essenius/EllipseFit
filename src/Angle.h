@@ -16,7 +16,7 @@
 
 #include <cstdint>
 
-namespace EllipseFit {
+namespace EllipseMath {
 
 	struct Angle {
 		double value;

@@ -18,7 +18,7 @@
 
 #include "Coordinate.h"
 
-namespace EllipseFit {
+namespace EllipseMath {
 
 	class QuadraticEllipse {
 	public:

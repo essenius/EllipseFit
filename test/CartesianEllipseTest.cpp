@@ -15,7 +15,7 @@
 #include "TestHelper.h"
 #include "CartesianEllipse.h"
 
-using namespace EllipseFit;
+using namespace EllipseMath;
 
 namespace EllipseFitTest {
 

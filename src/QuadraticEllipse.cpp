@@ -20,7 +20,7 @@
 
 // we use a, b, c, d, f, g as Wolfram does that too - probably to not use e, which can cause confusion with the mathematical entity
 
-namespace EllipseFit {
+namespace EllipseMath {
 
 	QuadraticEllipse::QuadraticEllipse(const double& a1, const double& b1, const double& c1, const double& d1, const double& f1, const double& g1) :
 		a(a1), b(b1 / 2), c(c1), d(d1 / 2), f(f1 / 2), g(g1) {
