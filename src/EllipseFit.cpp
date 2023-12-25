@@ -14,7 +14,6 @@
 #include <iostream>
 
 namespace EllipseMath {
-
 	// see https://autotrace.sourceforge.net/WSCG98.pdf for an explanation of the algorithm
 	// optimized version of https://github.com/mericdurukan/ellipse-fitting
 
@@ -74,7 +73,7 @@ namespace EllipseMath {
 		// there should be one where the condition is positive, that's the one we need
 
 		auto found = false;
-		for (int eigenVectorIndex = 0; eigenVectorIndex < condition.columnCount(); eigenVectorIndex++) {
+		for (Dimension eigenVectorIndex = 0; eigenVectorIndex < condition.columnCount(); eigenVectorIndex++) {
 			if (condition(0, eigenVectorIndex) > 0) {
 				a1 = Matrix(eigenvectors.getColumn(eigenVectorIndex));
 				found = true;

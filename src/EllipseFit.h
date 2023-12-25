@@ -17,9 +17,14 @@
 
 #include "Coordinate.h"
 #include "QuadraticEllipse.h"
-#include "SolverMatrix.h"
+#include <SolverMatrix.h>
 
 namespace EllipseMath {
+	using RixMatrix::Array;
+	using RixMatrix::Dimension;
+	using RixMatrix::Matrix;
+	using RixMatrix::SolverMatrix;
+
 	class EllipseFit {
 
 	public:

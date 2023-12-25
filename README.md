@@ -22,6 +22,8 @@ Initially the [Eigen](https://eigen.tuxfamily.org) library was used, but that li
 
 ## Classes/structures
 
+All classes are in the `EllipseFit` namespace.
+
 ### Angle
 
 Modeling an angle (in radians)

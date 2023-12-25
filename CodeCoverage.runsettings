@@ -22,13 +22,6 @@ Included items must then not match any entries in the exclude list to remain inc
               </Include>
 						</Functions>
 
-						<Sources>
-							<Exclude>
-								<Source>.*\\.*Mock.*</Source>
-                <Source>.*\\.*Test\\.*</Source>
-
-							</Exclude>
-						</Sources>
 						<!-- Don't forget "Attribute" at the end of the name -->
 						<!-- Match attributes on any code element: 
 						<Attributes>
