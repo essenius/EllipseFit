@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{374a0a0c-edb4-45d0-bde4-fce673e2b25c}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <WindowsTargetPlatformVersion>10.0.22000.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -114,6 +114,7 @@
     <ClCompile Include="AngleTest.cpp" />
     <ClCompile Include="CartesianEllipseTest.cpp" />
     <ClCompile Include="CoordinateTest.cpp" />
+    <ClCompile Include="EllipseFitDemo.cpp" />
     <ClCompile Include="EllipseFitTest.cpp" />
     <ClCompile Include="MathUtilsTest.cpp" />
     <ClCompile Include="QuadraticEllipseTest.cpp" />

@@ -1,4 +1,4 @@
-// Copyright 2023 Rik Essenius
+// Copyright 2023-2024 Rik Essenius
 // 
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
 // except in compliance with the License. You may obtain a copy of the License at
@@ -18,7 +18,7 @@ namespace EllipseMath {
 	// optimized version of https://github.com/mericdurukan/ellipse-fitting
 
 	// fixed buffer size as we don't want to fragment the heap
-	constexpr unsigned int EllipseFit::BufferSize;  // NOLINT(readability-redundant-declaration) -- using C++ 11 on device
+	constexpr unsigned int EllipseFit::BufferSize;  // NOLINT(readability-redundant-declaration, clang-diagnostic-deprecated-redundant-constexpr-static-def) -- using C++ 11 on device
 
 	EllipseFit::EllipseFit() {
 		// Calculating the constant vectors/matrices once to save a bit of time when fitting
@@ -50,17 +50,17 @@ namespace EllipseMath {
 	QuadraticEllipse EllipseFit::fit() const {
 
 		// Scatter matrix (S in the article)
-		const Matrix scatter1 = _design1.transposed() * _design1;
-		const Matrix scatter2 = _design1.transposed() * _design2;
-		const Matrix scatter3 = _design2.transposed() * _design2;
+		const Matrix scatter1 = _design1.transposed<Matrix>() * _design1;
+		const Matrix scatter2 = _design1.transposed<Matrix>() * _design2;
+		const Matrix scatter3 = _design2.transposed<Matrix>() * _design2;
 
 		if (!scatter3.isInvertible()) {
 			// if the scatter matrix is not invertible, we can't fit an ellipse
-			return QuadraticEllipse();
+			return {};
 		}
 
 		// reduced scatter matrix (M in the article)
-		const auto reducedScatter = SolverMatrix(_c1Inverse * (scatter1 - scatter2 * scatter3.inverted() * scatter2.transposed()));
+		const auto reducedScatter = SolverMatrix(_c1Inverse * (scatter1 - scatter2 * scatter3.inverted() * scatter2.transposed<Matrix>()));
 
 		const auto eigenvectors = reducedScatter.getEigenvectors();
 
@@ -86,7 +86,7 @@ namespace EllipseMath {
 			return { 0, 0, 0, 0, 0, 0 };
 		}
 
-		const auto a2 = -1 * scatter3.inverted() * scatter2.transposed() * a1;
+		const Matrix a2 = -1 * scatter3.inverted() * scatter2.transposed<Matrix>() * a1;
 
 		return { a1(0,0), a1(1,0), a1(2,0), a2(0,0), a2(1,0), a2(2,0) };
 	}
