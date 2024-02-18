@@ -8,24 +8,18 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3222E0F7-8787-438D-96C6-C109B0E79315}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
-		CMakeLists.txt = CMakeLists.txt
 		.runsettings = .runsettings
+		CMakeLists.txt = CMakeLists.txt
 		keywords.txt = keywords.txt
 		library.properties = library.properties
 		LICENSE = LICENSE
+		post-build.cmd = post-build.cmd
 		README.md = README.md
 		vcpkg-configuration.json = vcpkg-configuration.json
 		vcpkg.json = vcpkg.json
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test", "test\test.vcxproj", "{374A0A0C-EDB4-45D0-BDE4-FCE673E2B25C}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{B3B7C3F5-0576-4A1F-AEA0-540B798EAC5E}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EllipseFitDemo", "EllipseFitDemo", "{1FD00247-79EF-434A-BA4A-639FEFB5E51D}"
-	ProjectSection(SolutionItems) = preProject
-		examples\EllipseFitDemo\EllipseFitDemo.ino = examples\EllipseFitDemo\EllipseFitDemo.ino
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{65769249-D32B-4AA5-BA54-FBABFC487EEC}"
 	ProjectSection(SolutionItems) = preProject
@@ -60,9 +54,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{1FD00247-79EF-434A-BA4A-639FEFB5E51D} = {B3B7C3F5-0576-4A1F-AEA0-540B798EAC5E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9F9C4738-06A1-43FB-BD72-F43F5CA4E615}
