@@ -3,8 +3,7 @@ include(tools)
 include(FindGit)
 find_package(Git)
 
-
-assertVariableSet(matrixName GIT_FOUND)
+assertVariableSet(matrixName GIT_FOUND TOP_LEVEL)
 
 include (FetchContent)
 
