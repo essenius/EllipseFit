@@ -41,7 +41,7 @@ target_sources (${fitName} PUBLIC ${myHeaders} PRIVATE ${mySources})
 
 file(APPEND ${PROJECT_BINARY_DIR}/output.txt "executing target_link_libraries\n")
 target_link_libraries(${fitName} PUBLIC Matrix)
-file(APPEND ${PROJECT_BINARY_DIR}/output.txt "executing target_include_libraries\n")
+file(APPEND ${PROJECT_BINARY_DIR}/output.txt "executing target_include_libraries with '${includeFolders}'\n")
 target_include_directories(${fitName} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${includeFolders})
 
 file(APPEND ${PROJECT_BINARY_DIR}/output.txt "executing install TARGETS\n")

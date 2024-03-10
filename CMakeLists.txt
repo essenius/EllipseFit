@@ -5,9 +5,9 @@ set(testFitName ${fitName}Test)
 set(matrixName matrix) # lower case is important for fetching the library
 set(matrixLibName Matrix) # the name of the library as defined in the CMakeLists.txt of the library
 
-project(${fitName} VERSION 0.0.1 LANGUAGES CXX)
+project(${fitName} VERSION 0.2.2 LANGUAGES CXX)
 
-if ((CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR) AND NOT (WIN32))
+if ((CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR) AND NOT DEFINED VCPKG_TARGET_TRIPLET)
   set(TOP_LEVEL ON)
 else()
   set(TOP_LEVEL OFF)
