@@ -16,11 +16,12 @@
 
 #define _USE_MATH_DEFINES
 #include <cmath>
-#ifdef _MSC_VER
-// ReSharper disable once CppUnusedIncludeDirective - on purpose.
-// The MSVC compiler doesn't define M_PI. We need to include this file to get it,
-// and we don't want this conditional include to proliferate.
-#include <corecrt_math_defines.h>
+
+// g++ should now have M_PI defined. 
+// The VS compiler (_MSC_VER) defines M_PI in corecrt_math_defines.h, but esp-idf doesn't seem to define it at all.
+// So we define it ourselves - no use making the code more complex than it needs to be. 
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
 #endif
 
 namespace EllipseMath {
