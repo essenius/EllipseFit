@@ -1,4 +1,4 @@
-// Copyright 2023 Rik Essenius
+// Copyright 2023-2024 Rik Essenius
 // 
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
 // except in compliance with the License. You may obtain a copy of the License at
@@ -44,17 +44,17 @@ namespace EllipseFitTest {
 	TEST(AngleTest, CompareTest) {
 		constexpr Angle A {M_PI};
 		constexpr Angle B {M_PI};
-		assertAnglesEqual(A, { M_PI }, "a = M_PI");
-		assertAnglesEqual(A, B, "a=b");
-		assertAnglesEqual({ M_PI }, { M_PI }, "M_PI = M_PI");
+		expectAnglesEqual(A, { M_PI }, "a = M_PI");
+		expectAnglesEqual(A, B, "a=b");
+		expectAnglesEqual({ M_PI }, { M_PI }, "M_PI = M_PI");
 	}
 
 	TEST(AngleTest, OperatorTest) {
 		constexpr Angle A {M_PI};
 		const auto b = A - 7 * M_PI / 3;
-		assertDoubleEqual(2 * M_PI / 3, b, "operator- on double");
+		expectDoubleEqual(2 * M_PI / 3, b, "operator- on double");
 		const auto c = A - Angle{ M_PI / 3 };
-		assertAnglesEqual({ 2 * M_PI / 3 }, c, "operator- on angle");
+		expectAnglesEqual({ 2 * M_PI / 3 }, c, "operator- on angle");
 	}
 
 	TEST(AngleTest, Times10Test) {
@@ -63,10 +63,10 @@ namespace EllipseFitTest {
 	}
 
 	TEST(AngleTest, Normalize) {
-		assertDoubleEqual(M_PI, Angle::normalized(M_PI), "Angle normalize PI is correct");
-		assertDoubleEqual(-M_PI, Angle::normalized(-M_PI), "Angle normalize -PI is correct");
-		assertDoubleEqual(0.1 * M_PI, Angle::normalized(-3.9 * M_PI), "Angle normalize -3.9 * PI is correct");
-		assertDoubleEqual(-0.9 * M_PI, Angle::normalized(13.1 * M_PI), "Angle normalize 13.1 * PI is correct");
+		expectDoubleEqual(M_PI, Angle::normalized(M_PI), "Angle normalize PI is correct");
+		expectDoubleEqual(-M_PI, Angle::normalized(-M_PI), "Angle normalize -PI is correct");
+		expectDoubleEqual(0.1 * M_PI, Angle::normalized(-3.9 * M_PI), "Angle normalize -3.9 * PI is correct");
+		expectDoubleEqual(-0.9 * M_PI, Angle::normalized(13.1 * M_PI), "Angle normalize 13.1 * PI is correct");
 
 	}
 }

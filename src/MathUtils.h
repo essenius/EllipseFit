@@ -1,4 +1,4 @@
-// Copyright 2023 Rik Essenius
+// Copyright 2023-2024 Rik Essenius
 // 
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
 // except in compliance with the License. You may obtain a copy of the License at
@@ -14,9 +14,12 @@
 #ifndef MATH_UTILS_H
 #define MATH_UTILS_H
 
-#ifdef _WIN32
-// ReSharper disable once CppUnusedIncludeDirective - on purpose, to get M_PI defined.
-// And we don't want this conditional include proliferate.
+#define _USE_MATH_DEFINES
+#include <cmath>
+#ifdef _MSC_VER
+// ReSharper disable once CppUnusedIncludeDirective - on purpose.
+// The MSVC compiler doesn't define M_PI. We need to include this file to get it,
+// and we don't want this conditional include to proliferate.
 #include <corecrt_math_defines.h>
 #endif
 

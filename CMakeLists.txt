@@ -5,10 +5,13 @@ set(testFitName ${fitName}Test)
 set(matrixName matrix) # lower case is important for fetching the library
 set(matrixLibName Matrix) # the name of the library as defined in the CMakeLists.txt of the library
 
-project(${fitName} VERSION 0.2.2 LANGUAGES CXX)
+project(${fitName} VERSION 0.2.3 LANGUAGES CXX)
 
 if ((CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR) AND NOT DEFINED VCPKG_TARGET_TRIPLET)
   set(TOP_LEVEL ON)
+  if(WIN32)
+    set(CMAKE_GENERATOR "MinGW Makefiles")
+  endif()
 else()
   set(TOP_LEVEL OFF)
 endif()
@@ -22,7 +25,7 @@ set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};${PROJECT_SOURCE_DIR}/lib;${PROJECT_
 
 add_subdirectory(lib)
 
-if (TOP_LEVEL) 
+if (TOP_LEVEL AND NOT DEFINED WIN32) 
   message(STATUS "Top level project - enabling code coverage")
   set(CODE_COVERAGE ON)
   include(code-coverage)
@@ -35,7 +38,9 @@ if(TOP_LEVEL)
   message(STATUS "Top level project - enabling tests")
   enable_testing()
   add_subdirectory(test)
-  target_code_coverage(${testFitName} EXCLUDE build/_deps/googletest-src/* test/*) 
+  if (CODE_COVERAGE)
+    target_code_coverage(${testFitName} EXCLUDE build/_deps/googletest-src/* test/*) 
+  endif()
 endif()
 
 #install(TARGETS ${fitName} LIBRARY DESTINATION ${CMAKE_CURRENT_BINARY_DIR})

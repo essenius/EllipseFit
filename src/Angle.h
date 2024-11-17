@@ -1,4 +1,4 @@
-// Copyright 2023 Rik Essenius
+// Copyright 2023-2024 Rik Essenius
 // 
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
 // except in compliance with the License. You may obtain a copy of the License at
@@ -31,9 +31,6 @@ namespace EllipseMath {
 		 */
 		int16_t degreesTimes10() const;
 
-		Angle operator-(const Angle& other) const;
-
-		double operator-(const double& other) const;
 
 		/**
 		* \return the quadrant of the angle (1, 2, 3 or 4)
@@ -49,6 +46,10 @@ namespace EllipseMath {
 		* \return the sine of the angle
 		*/
 		double sin() const;
+
+		friend Angle operator-(const Angle& left, const Angle& right);
+
+		friend double operator-(const Angle& left, const double& other);
 	};
 }
 #endif

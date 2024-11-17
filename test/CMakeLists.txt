@@ -27,6 +27,9 @@ target_sources (${testFitName}
     PRIVATE AngleTest.cpp CartesianEllipseTest.cpp CoordinateTest.cpp EllipseFitTest.cpp MathUtilsTest.cpp QuadraticEllipseTest.cpp TestHelper.cpp 
 )
 
+set(CMAKE_BUILD_TYPE Debug)
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")
+
 FetchContent_MakeAvailable_With_Check(${matrixName})
 
 target_link_libraries(${testFitName} ${fitName} gtest_main ${matrixLibName})

@@ -1,4 +1,4 @@
-// Copyright 2023 Rik Essenius
+// Copyright 2023-2024 Rik Essenius
 // 
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
 // except in compliance with the License. You may obtain a copy of the License at
@@ -9,21 +9,11 @@
 // is distributed on an "AS IS" BASIS WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and limitations under the License.
 
-#include <cstdio>
-#include <cmath>
-#include "Angle.h"
 #include "MathUtils.h"
+#include <cstdio>
+#include "Angle.h"
 
 namespace EllipseMath {
-
-	Angle Angle::operator-(const Angle& other) const {
-		return { operator-(other.value) };
-	}
-
-	double Angle::operator- (const double& other) const {
-		const auto returnValue = value - other;
-		return normalized(returnValue);
-	}
 
 	double Angle::cos() const {
 		return std::cos(value);
@@ -41,8 +31,8 @@ namespace EllipseMath {
 	}
 
 	double Angle::normalized(const double& value) {
-		const auto bound = abs(value) / M_PI;
-		if (abs(bound) <= 1) return value;
+		const auto bound = fabs(value) / M_PI;
+		if (fabs(bound) <= 1) return value;
 		const auto factor = std::trunc(0.5 * (bound + 1)) * -sign(value);
 		return value + factor * 2 * M_PI;
 	}
@@ -50,4 +40,13 @@ namespace EllipseMath {
 	double Angle::sin() const {
 		return std::sin(value);
 	}
+
+
+    Angle operator-(const Angle &left, const Angle& right) {
+        return  { left - right.value };
+    }
+
+	double operator-(const Angle &left, const double& right) {
+		const auto returnValue = left.value - right;
+		return left.normalized(returnValue);    }
 }
