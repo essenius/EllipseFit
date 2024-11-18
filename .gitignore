@@ -392,3 +392,6 @@ secrets*.*
 
 # build folder
 build/
+
+# dist folder
+dist/
