@@ -129,6 +129,7 @@
     <ClCompile Include="EllipseFitDemo.cpp" />
     <ClCompile Include="EllipseFitTest.cpp" />
     <ClCompile Include="MathUtilsTest.cpp" />
+    <ClCompile Include="MemTest.cpp" />
     <ClCompile Include="QuadraticEllipseTest.cpp" />
     <ClCompile Include="TestHelper.cpp" />
   </ItemGroup>

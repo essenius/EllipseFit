@@ -111,4 +111,8 @@ namespace EllipseFitTest {
 		const auto cartesianCircle = CartesianEllipse(quadraticCircle);
 		EXPECT_FALSE(cartesianCircle.isValid()) << "Fit not succeeded";
 	}
+	TEST(CartesianEllipseTest, EmptyEllipseTest) {
+        const CartesianEllipse cartesianEllipse;
+		EXPECT_FALSE(cartesianEllipse.isValid()) << "Empty ellipse is not valid";
+	}
 }
