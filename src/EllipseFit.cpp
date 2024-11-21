@@ -28,14 +28,14 @@ namespace EllipseMath {
 	}
 
 	bool EllipseFit::addMeasurement(const double x, const double y) {
-		if (_size >= BufferSize) return false;
+		if (_pointCount >= BufferSize) return false;
 		// Design matrix (D in the article). Building up incrementally to minimize compute at fit
-		_design1(_size, 0) = x * x;
-		_design1(_size, 1) = x * y;
-		_design1(_size, 2) = y * y;
-		_design2(_size, 0) = x;
-		_design2(_size, 1) = y;
-		_size++;
+		_design1(_pointCount, 0) = x * x;
+		_design1(_pointCount, 1) = x * y;
+		_design1(_pointCount, 2) = y * y;
+		_design2(_pointCount, 0) = x;
+		_design2(_pointCount, 1) = y;
+		_pointCount++;
 		return true;
 	}
 
@@ -44,7 +44,7 @@ namespace EllipseMath {
 	}
 
 	void EllipseFit::begin() {
-		_size = 0;
+		_pointCount = 0;
 	}
 
 	QuadraticEllipse EllipseFit::fit() const {
@@ -56,7 +56,7 @@ namespace EllipseMath {
 
 		if (!scatter3.isInvertible()) {
 			// if the scatter matrix is not invertible, we can't fit an ellipse
-			return {};
+			return QuadraticEllipse();
 		}
 
 		// reduced scatter matrix (M in the article)
@@ -86,7 +86,7 @@ namespace EllipseMath {
 			return { 0, 0, 0, 0, 0, 0 };
 		}
 
-		const Matrix a2 = -1 * scatter3.inverted() * scatter2.transposed<Matrix>() * a1;
+		const auto a2 = -1 * scatter3.inverted() * scatter2.transposed<Matrix>() * a1;
 
 		return { a1(0,0), a1(1,0), a1(2,0), a2(0,0), a2(1,0), a2(2,0) };
 	}

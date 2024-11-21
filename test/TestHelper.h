@@ -1,4 +1,4 @@
-// Copyright 2023 Rik Essenius
+// Copyright 2023-2024 Rik Essenius
 // 
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
 // except in compliance with the License. You may obtain a copy of the License at
@@ -21,9 +21,9 @@ namespace EllipseFitTest {
 	using EllipseMath::Angle;
 	using EllipseMath::Epsilon;
 
-	void assertDoubleEqual(const double& a, const double& b, const std::string& label, const double& epsilon = Epsilon);
-	void assertCoordinatesEqual(const Coordinate& a, const Coordinate& b, const std::string& label, const double& epsilon = Epsilon);
-	void assertAnglesEqual(const Angle& a, const Angle& b, const std::string& label, const double& epsilon = Epsilon);
+	void expectDoubleEqual(const double& a, const double& b, const std::string& label, const double& epsilon = Epsilon);
+	void expectCoordinatesEqual(const Coordinate& a, const Coordinate& b, const std::string& label, const double& epsilon = Epsilon);
+	void expectAnglesEqual(const Angle& a, const Angle& b, const std::string& label, const double& epsilon = Epsilon);
 
 }
 #endif

@@ -14,6 +14,7 @@ FetchContent_Declare(
     PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gtest
     INSTALL_COMMAND ""
 )
+
 # For Windows: Prevent overriding the parent project's compiler/linker settings
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 
@@ -26,6 +27,9 @@ target_sources (${testFitName}
     PRIVATE TestHelper.h EllipseFitTest.h
     PRIVATE AngleTest.cpp CartesianEllipseTest.cpp CoordinateTest.cpp EllipseFitTest.cpp MathUtilsTest.cpp QuadraticEllipseTest.cpp TestHelper.cpp 
 )
+
+set(CMAKE_BUILD_TYPE Debug)
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")
 
 FetchContent_MakeAvailable_With_Check(${matrixName})
 

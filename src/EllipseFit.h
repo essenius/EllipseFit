@@ -1,4 +1,4 @@
-// Copyright 2023 Rik Essenius
+// Copyright 2023-2024 Rik Essenius
 // 
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
 // except in compliance with the License. You may obtain a copy of the License at
@@ -54,12 +54,12 @@ namespace EllipseMath {
 		/**
 		 * \returns whether the buffer is full
 		 */
-		bool bufferIsFull() const { return _size >= BufferSize; }
+		bool bufferIsFull() const { return _pointCount >= BufferSize; }
 
 		/**
 		 * \returns the number of points in the buffer
 		 */
-		unsigned int getPointCount() const { return _size; }
+		unsigned int getPointCount() const { return _pointCount; }
 
 		/**
 		 * \returns the size of the buffer
@@ -72,7 +72,7 @@ namespace EllipseMath {
 		Matrix _design1{ BufferSize, 3 };
 		Matrix _design2{ BufferSize, 3 };
 
-		unsigned int _size = 0;
+		unsigned int _pointCount = 0;
 	};
 }
 #endif

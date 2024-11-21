@@ -1,4 +1,4 @@
-// Copyright 2023 Rik Essenius
+// Copyright 2023-2024 Rik Essenius
 // 
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
 // except in compliance with the License. You may obtain a copy of the License at
@@ -27,9 +27,9 @@ namespace EllipseFitTest {
 	class EllipseFitTest : public ::testing::Test {
 	protected:
 		static QuadraticEllipse fitPerfectEllipse(EllipseFit& ellipseFit, const CartesianEllipse& inputEllipse);
-		static void assertPerfectEllipse(const Coordinate& center, const Coordinate& radius, const Angle& angle);
-		static void assertEllipseWithDistance(const Coordinate& center, const Coordinate& radius, const Angle& angle, const double& distance);
-		static void assertPartialEllipse(const CartesianEllipse& ellipse, const double& fraction, const double& startAngle);
+		static void expectPerfectEllipse(const Coordinate& center, const Coordinate& radius, const Angle& angle);
+		static void expectEllipseWithDistance(const Coordinate& center, const Coordinate& radius, const Angle& angle, const double& distance);
+		static void expectPartialEllipse(const CartesianEllipse& ellipse, const double& fraction, const double& startAngle);
 	};
 }
 #endif

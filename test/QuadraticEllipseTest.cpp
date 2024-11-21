@@ -1,4 +1,4 @@
-// Copyright 2023 Rik Essenius
+// Copyright 2023-2024 Rik Essenius
 // 
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
 // except in compliance with the License. You may obtain a copy of the License at
@@ -33,11 +33,11 @@ namespace EllipseFitTest {
 	void assertEllipse(const Coordinate& center, const Coordinate& radius, const Angle& angle) {
 		const auto coefficient = makeEllipse(center, radius, angle);
 
-		assertAnglesEqual(angle, coefficient.getAngle(), "Angle");
+		expectAnglesEqual(angle, coefficient.getAngle(), "Angle");
 		const auto center1 = coefficient.getCenter();
-		assertCoordinatesEqual(center, center1, "Center");
+		expectCoordinatesEqual(center, center1, "Center");
 		const auto radius1 = coefficient.getRadius();
-		assertCoordinatesEqual(radius, radius1, "Radius");
+		expectCoordinatesEqual(radius, radius1, "Radius");
 	}
 
 	TEST(QuadraticEllipseTest, RoundTrip) {

@@ -1,4 +1,4 @@
-// Copyright 2023 Rik Essenius
+// Copyright 2023-2024 Rik Essenius
 // 
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
 // except in compliance with the License. You may obtain a copy of the License at
@@ -14,10 +14,14 @@
 #ifndef MATH_UTILS_H
 #define MATH_UTILS_H
 
-#ifdef _WIN32
-// ReSharper disable once CppUnusedIncludeDirective - on purpose, to get M_PI defined.
-// And we don't want this conditional include proliferate.
-#include <corecrt_math_defines.h>
+#define _USE_MATH_DEFINES
+#include <cmath>
+
+// g++ should now have M_PI defined. 
+// The VS compiler (_MSC_VER) defines M_PI in corecrt_math_defines.h, but esp-idf doesn't seem to define it at all.
+// So we define it ourselves - no use making the code more complex than it needs to be. 
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
 #endif
 
 namespace EllipseMath {
